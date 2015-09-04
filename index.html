@@ -1,54 +1,193 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next use-motion ">
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="description" content="">
-	<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  
 
-	
-	<link rel="stylesheet" href="/bower_components/normalize.css/normalize.css"/>
-	<link rel="stylesheet" href="/css/style.css">
-	
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	<title>happynear - </title>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="happynear, deep learning" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="happynear">
+<meta property="og:url" content="http://saban.wang/index.html">
+<meta property="og:site_name" content="happynear">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="happynear">
+<meta name="twitter:description">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> happynear </title>
 </head>
-<body>
-<header id="header">
-	<div class="center">
-		<div class="wrap">
-			<div id="site">
-				<h1><a href="/">happynear</a></h1>
-				
 
-<div id="content">
-	<div class="center">
-		<div class="main-col">
-			
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
 
-
-<article class="[draft]">
-	
-	<div class="post-content">
-		<header>
-			
-				<div class="meta">
-					<div class="icon"></div>
-					<time datetime="2015-07-12T05:18:25.000Z"><a href="/2015/07/12/Build-Caffe-and-Matlab-Python-Wrapper-in-Visual-Studio/">2015-07-12</a></time>
-				</div>
-			
-			
-
-<h1 class="title"><a href="/2015/07/12/Build-Caffe-and-Matlab-Python-Wrapper-in-Visual-Studio/">Build Caffe and Matlab/Python Wrapper in Visual Studio</a></h1>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
 
 
-		</header>
-		<div class="entry">
-			
-			<h1 id="Update">Update</h1><p>2015/08/18 The lmdb problem has been fixed. Download the new lmdb lib file from <a href="http://pan.baidu.com/s/1dDHbbgP" target="_blank" rel="external">http://pan.baidu.com/s/1dDHbbgP</a> (only a small patch), overwrite the original one in <code>3rdparty/lib</code>, and re-link the convert_imageset, convert_mnist etc projects, you will be able to create lmdb on Windows.<br>Thanks to <a href="https://github.com/dw/py-lmdb" target="_blank" rel="external">dw</a>.</p>
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">happynear</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+  <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/07/12/Build-Caffe-and-Matlab-Python-Wrapper-in-Visual-Studio/" itemprop="url">
+                Build Caffe and Matlab/Python Wrapper in Visual Studio
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-07-12T13:18:25+08:00" content="2015-07-12">
+            2015-07-12
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Update">Update</h1><p>2015/08/18 The lmdb problem has been fixed. Download the new lmdb lib file from <a href="http://pan.baidu.com/s/1dDHbbgP" target="_blank" rel="external">http://pan.baidu.com/s/1dDHbbgP</a> (only a small patch), overwrite the original one in <code>3rdparty/lib</code>, and re-link the convert_imageset, convert_mnist etc projects, you will be able to create lmdb on Windows.<br>Thanks to <a href="https://github.com/dw/py-lmdb" target="_blank" rel="external">dw</a>.</p>
 <p>2015/08/08 The cuDNN v3 is not very stable at present. The master branch has been rolled back to cuDNN v2. The cuDNN v3 will come back as soon as it has been tested enough. Nonetheless, you can still find cuDNN v3 version in branch <code>cuDNNV3</code>. </p>
 <p>Fortunately, cuDNN is backward-compatible, so the 3rdparty libraries (<a href="http://pan.baidu.com/s/1i390tZB" target="_blank" rel="external">http://pan.baidu.com/s/1i390tZB</a>) need not to be changed.</p>
 <p>2015/08/06 cuDNN v3 is released! The new 3rdparty library with cuDNN v3 can be downloaded from <a href="http://pan.baidu.com/s/1i390tZB" target="_blank" rel="external">http://pan.baidu.com/s/1i390tZB</a>. In this update, I use an ungainly method to build the caffe core functions in one project as a static lib. I am still looking for better solutions. Issues and Pull Requests are welcomed.</p>
@@ -74,108 +213,211 @@
 <h1 id="Matlab_Wrapper">Matlab Wrapper</h1><p>Just change the Matlab include and library path defined in the settings and compile.<br><strong>Don’t forget to add <code>./matlab</code> to your Matlab path.</strong></p>
 <h1 id="Python_Wrapper">Python Wrapper</h1><p>Similar with Matlab, just change the python include and library path defined in the settings and compile.</p>
 <h1 id="MNIST_example">MNIST example</h1><p>Please download the mnist leveldb database from <a href="http://pan.baidu.com/s/1mgl9ndu" target="_blank" rel="external">http://pan.baidu.com/s/1mgl9ndu</a> and extract it to <code>./examples/mnist</code>. Then double click <code>./run_mnist.bat</code> to run the MNIST demo.</p>
+</span>
+        
+      
+    </div>
 
-			
-		</div>
-		<footer class="clearfix">
-			
-				
-				
-					<div class="disqus-comment">
-						<a href="http://saban.wang/2015/07/12/Build-Caffe-and-Matlab-Python-Wrapper-in-Visual-Studio/#disqus_thread" class="comment-link">评论</a>
-					</div>
-				
-			
-			
-			
-<div class="tags">
-	
-	<a href="/tags/Caffe-Matlab-Python-VS/">#Caffe Matlab Python VS</a>
-	
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+ </div>
+
+        
+
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Feng Wang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Feng Wang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng Wang</span>
 </div>
 
-		</footer>
-	</div>
-</article>
-
-
-<nav id="pagination">
-	
-	
-</nav>
-
-
-<script>
-	(function (disqus_shortname) {
-		window.addEventListener('DOMContentLoaded', function () {
-			var dsq = document.createElement('script');
-			dsq.type = 'text/javascript';
-			dsq.async = true;
-			dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-			document.getElementsByTagName('head')[0].appendChild(dsq);
-		}, false);
-	}('disqus_Vjo1i70A0x'));
-</script>
-
-
-
-		</div>
-		
-	</div>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
 </div>
 
-<footer id="footer">
-	<div class="center">
-		&copy; 2015
-		
-		Feng Wang
-		.
-		&nbsp;&nbsp;
-		Blog generated by <a href="http://hexo.io">hexo</a>
-	</div>
-</footer>
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
 
 
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
 
 
-<script>
-	/* #header特效 */
-	(function() {
-		var $header = $('#header');
-		$(window).on('scroll', function() {
-			if (window.scrollY > 100) {
-				$header.addClass('small');
-			} else {
-				$header.removeClass('small');
-			}
-		});
-	}());
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
 </script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script>
-	(function ($) {
-		$('.fancybox').fancybox();
-	})(jQuery);
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 </script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
 
-	ga('create', 'UA-67196555-1', 'auto');
-	ga('send', 'pageview');
-</script>
-
-
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>
