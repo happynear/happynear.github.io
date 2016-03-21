@@ -59,22 +59,26 @@
 
 
 
-<meta name="description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
-1. Introduction
-If you are doing research in Deep Learning, you">
+<meta name="description" content="1. Introduction
+A Machine Learning researcher may split the learned model into two catogories, generative model and discriminative model. Convolutional Neural Network is usually seen as a powerful di">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Normalize All Layers">
-<meta property="og:url" content="http://saban.wang/2016/03/21/Normalization-Propagation/index.html">
+<meta property="og:title" content="How do you look like in others' brain?">
+<meta property="og:url" content="http://saban.wang/2016/03/22/Face-Visualization/index.html">
 <meta property="og:site_name" content="Saban's Blog">
-<meta property="og:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
-1. Introduction
-If you are doing research in Deep Learning, you">
-<meta property="og:updated_time" content="2016-03-21T10:09:43.122Z">
+<meta property="og:description" content="1. Introduction
+A Machine Learning researcher may split the learned model into two catogories, generative model and discriminative model. Convolutional Neural Network is usually seen as a powerful di">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png">
+<meta property="og:updated_time" content="2016-03-21T17:40:53.491Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Normalize All Layers">
-<meta name="twitter:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
-1. Introduction
-If you are doing research in Deep Learning, you">
+<meta name="twitter:title" content="How do you look like in others' brain?">
+<meta name="twitter:description" content="1. Introduction
+A Machine Learning researcher may split the learned model into two catogories, generative model and discriminative model. Convolutional Neural Network is usually seen as a powerful di">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
 
 
 
@@ -92,7 +96,7 @@ If you are doing research in Deep Learning, you">
   };
 </script>
 
-  <title> Normalize All Layers | Saban's Blog </title>
+  <title> How do you look like in others' brain? | Saban's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -212,7 +216,7 @@ If you are doing research in Deep Learning, you">
             
             
               
-                Normalize All Layers
+                How do you look like in others' brain?
               
             
           </h1>
@@ -224,38 +228,19 @@ If you are doing research in Deep Learning, you">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T00:44:00+08:00" content="2016-03-21">
-              2016-03-21
+            <time itemprop="dateCreated" datetime="2016-03-22T01:32:32+08:00" content="2016-03-22">
+              2016-03-22
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/21/Normalization-Propagation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Normalization-Propagation/" itemprop="commentsCount"></span>
+                <a href="/2016/03/22/Face-Visualization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/Face-Visualization/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -265,7 +250,7 @@ If you are doing research in Deep Learning, you">
 
           
           
-             <span id="/2016/03/21/Normalization-Propagation/" class="leancloud_visitors" data-flag-title="Normalize All Layers">
+             <span id="/2016/03/22/Face-Visualization/" class="leancloud_visitors" data-flag-title="How do you look like in others' brain?">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -286,80 +271,59 @@ If you are doing research in Deep Learning, you">
       
 
       
-        <p>This article is a note on <a href="http://arxiv.org/abs/1603.01431" target="_blank" rel="external">《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》</a>.</p>
-<h2 id="introduction">1. Introduction</h2>
-<p>If you are doing research in Deep Learning, you must know the Batch Normalization[3] techinque, which is a powerful tool avoiding internal covariate shift and gradient vanishing. However, batch normalization just normalized the parametric layers such as convolution layer and innerproduct layer. Another disadvantage is that the Batch Normalization is data-dependent. It is unstable during training if the sample are highly diverse or when we are doing regression instead of classification.</p>
-<p>In [1], the authors proposed an approach that if we feed a uniform gaussian distributed data into a network, all the intermediate output should also be uniform gaussian distribute. or at least <strong>expected</strong> to have zero mean and one standard deviation. In this manner, the data flow of the whole network will be very stable, no numerical vanishment or explosion. Since this method is data-independent, it is suitable for regression task and training with batch size of 1.</p>
-<h2 id="parametric-layers">2. Parametric Layers</h2>
-<p>For parametric layers, such as convolution layer and innerproduct layer, they have a mathematic expression as,</p>
-<p><span class="math display">\[y = W^Tx.\]</span></p>
-<p>Here we express the convolution layer in a innerproduct way, i.e. using <code>im2col</code> operator to convert the feature map into a wide matrix <span class="math inline">\(x\)</span>.</p>
-<p>Now we assume that <span class="math inline">\(x\sim N(0,I)\)</span>, our objective is to let each element in <span class="math inline">\(y\)</span> also follows a uniform gaussian distribution, or at least each value is expected to have zero mean and variance is 1. We can easily find that <span class="math inline">\(E[y]=0\)</span> and</p>
-<p><span class="math display">\[cov[y] = E[yy^T] = E[W^Txx^TW] = W^TE[xx^T]W = W^TW.\]</span></p>
-<p>Let <span class="math inline">\(W_i\)</span> to be the <span class="math inline">\(i\)</span>-th row of <span class="math inline">\(W\)</span>, then <span class="math inline">\(\Vert W_i\Vert _2\)</span> must equals to 1 to satisfy our target. So a good way to control the variance of each parametric layers’ output is to force each row of the weight matrix to be on a <span class="math inline">\(\ell 2\)</span> unit ball.</p>
-<p>To achieve this, we may scale the weight matrix during feed forward,</p>
-<p><span class="math display">\[\tilde{W_i} = \frac{W_i}{\Vert W_i \Vert _2},\]</span></p>
-<p>and in back propagation a partial derivative is used:</p>
-<p><span class="math display">\[\frac{\partial \ell}{\partial W_i} = 
-\frac{\frac{\partial \ell}{\partial \tilde{W_i}} - 
-\tilde{W_i}\sum_j{\frac{\partial \ell}{\partial \tilde{W_{ij}}}\tilde{W_{ij}}}}
-{\Vert W_i \Vert _2}.\]</span></p>
-<p>Or, we can directly use the standard back propagation to update <span class="math inline">\(W\)</span> and force to normalize it after each iteration. Which one is better still need examination by experiment.</p>
-<h2 id="activation-layers">3. Activation Layers</h2>
-<p>Similar with the paramteric layers, we also require the post-activation values to have zero mean and 1 standard deviation.</p>
-<h3 id="relu">1) ReLU</h3>
-<p>We all know that the formula of ReLU is,</p>
-<p><span class="math display">\[y = max(x, 0).\]</span></p>
-<p>Assuming <span class="math inline">\(x\sim N(0,I)\)</span>, we can obtain,</p>
-<p><span class="math display">\[E[y] = \int_{0}^{+\infty}x\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=
-\frac{1}{\sqrt{2\pi}}\int_{0}^{+\infty}e^{-\frac{x^2}{2}}d\frac{x^2}{2}.\]</span></p>
-<p>It can be easily got, <span class="math inline">\(E[y] = \sqrt{\frac{1}{2\pi}}\)</span>. Then</p>
-<p><span class="math display">\[E[y^2] = \int_{0}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=
-\frac{1}{2}\int_{-\infty}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx = \frac{1}{2},\]</span></p>
-<p><span class="math display">\[Var[y] = E[y^2] - E[y]^2=\frac{1}{2} - \frac{1}{2\pi}.\]</span></p>
-<p>Thus, we should normalize the post-activation of ReLU by substracting <span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span> and dividing <span class="math inline">\(\sqrt{\frac{1}{2} - \frac{1}{2\pi}}\)</span>.</p>
-<h3 id="sigmoid">2) Sigmoid</h3>
-<p>The formula of Sigmoid activation is,</p>
-<p><span class="math display">\[y = \frac{1}{1+e^{-x}},\]</span></p>
-<p><span class="math display">\[E[y] = \int_{-\infty}^{+\infty}\frac{1}{1+e^{-x}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx \\
-=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2}+\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\\
-=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx +\frac{1}{2}\\
-=0+\frac{1}{2}=\frac{1}{2},\]</span></p>
-<p><span class="math display">\[E[y^2] = \int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}})^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx.\]</span></p>
-<p>OK, I don’t think we can get a close form of the integral part of <span class="math inline">\(E[y^2]\)</span>. Please note that we are not using the exact form of the equation. What we need is only an empirical value, so we can got the numbers by simulating. With a huge amount of random values, say 100,000, we can get relatively accurate means and standard derivations. By running the script in Matlab,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(100000,1);</span><br><span class="line">y = 1 ./ (1 + exp(-x));</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
-<p>we can get Sigmoid’s standard deviation: <strong>0.2083</strong>. This value can be directly wrote into the program to let the post-sigmoid value have 1 standard deviation.</p>
-<h2 id="pooling-layer">4. Pooling Layer</h2>
-<p>There are two types of pooling layer, average-pooling and max-pooling. For the average-pooling layer, it is easy to infer that <span class="math inline">\(E[y] = 0\)</span> and <span class="math inline">\(Std[y] = \frac{1}{\sqrt{n}} = \frac{1}{s}\)</span>, where <span class="math inline">\(n\)</span> is the number of neurons in a pooling window or <span class="math inline">\(s\)</span> is the side length of a square pooling window.</p>
-<p>For the max-pooling layer, there is no close form expressions too. We should still using simulated values generated by,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(10000000, 9);</span><br><span class="line">y = max(x, [], 2);</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
-<p>The mean value of a <span class="math inline">\(3\times3\)</span> max-pooling is <strong>1.4850</strong> and the standard deviation is <strong>0.5978</strong>. For <span class="math inline">\(2\times2\)</span> max-pooling, mean is <strong>1.0291</strong> and standard deviation is <strong>0.7010</strong>.</p>
-<h2 id="dropout-layer">5. Dropout Layer</h2>
-<p>Dropout is also a widely used layer in CNN. Although it is claimed to be useless in the NormProp paper, we still would like to record the formulations here. Dropout randomly erase values with a probability of <span class="math inline">\(1-p\)</span>. Now we write it into a mathematic form,</p>
-<p><span class="math display">\[y = x \odot r,\]</span></p>
-<p>where <span class="math inline">\(r\sim Bernoulli(p)\)</span>. Thus,</p>
-<p><span class="math display">\[E[y] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{xr_ip_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
-=0 * \int_{-\infty}^{+\infty}{x(1-p)\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx + 1 * \int_{-\infty}^{+\infty}{xp\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
-=0\]</span></p>
-<p><span class="math display">\[E[y^2] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{(xr_i)^2p_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
-=0+\int_{-\infty}^{+\infty}{x^2p\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
-=p\]</span></p>
-<p><span class="math display">\[Std[y] = \sqrt{E[y^2]-E[y]^2}=\sqrt{p}\]</span></p>
-<p>Interestingly, this result is different from what we usually do. We usally preserve values with a ratio of <span class="math inline">\(p\)</span> and divide the preserved values by <span class="math inline">\(p\)</span>, too. Now as we calculated, to achieve 1 s.t.d., we should divide the preserved values by <span class="math inline">\(\sqrt{p}\)</span>. This result should be carefully examined by experiment in the future.</p>
-<h2 id="conclusion">6. Conclusion</h2>
-<p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and standard deviation divided will become a standard in the near future. Now we should start to modify our present layers with the new normalization method. When we are creating new layers, one more step should be done, calculating the simulated mean and standard deviation, and then normalize the output of the new layers.</p>
-<p>The shortage of this report is that we haven’t considered the back-propagation procedure. In paper [1][4], they claim that by normalizing the singular values of Jacobian matrix to 1 will lead to faster convergency and more numerically stable. I will study them and explore how to integrate the Jacobian normalization into the present normalization method.</p>
-<h2 id="reference">Reference</h2>
-<p>[1] Devansh Arpit, Yingbo Zhou, Bhargava U. Kota, Venu Govindaraju, <strong>Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks</strong>. <a href="http://arxiv.org/abs/1603.01431" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1603.01431</a></p>
-<p>[2] Tim Salimans, Diederik P. Kingma, Weight Normalization: <strong>A Simple Reparameterization to Accelerate Training of Deep Neural Networks</strong>. <a href="http://arxiv.org/abs/1602.07868" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1602.07868</a></p>
-<p>[3] Sergey Ioffe, Christian Szegedy, <strong>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</strong>. <a href="http://arxiv.org/abs/1502.03167" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1502.03167</a></p>
-<p>[4] Andrew M. Saxe, James L. McClelland, Surya Ganguli, <strong>Exact solutions to the nonlinear dynamics of learning in deep linear neural networks</strong>. <a href="http://arxiv.org/abs/1312.6120" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1312.6120</a></p>
-<h1 id="appendices">Appendices</h1>
-<h2 id="a.-the-formula-fault-of-1">A. The formula fault of [1]</h2>
-<p>In [1], they present a bound describing the error of using diagnose matrix to approximate a covariance matrix. However, the bound is wrong. They mistake the <span class="math inline">\(\Vert W_i\Vert_2^4\)</span> by <span class="math inline">\(\Vert W_i\Vert_2^2\)</span> in the last line of equation 18. Then the equation 3 and 19 become to:</p>
-<p><span class="math display">\[\Vert \Sigma - diag(\alpha) \Vert_F^2\le \sigma^4 \sum_{i,j=1;i\ne j}^m{m(m-1)\mu^2 \Vert W_i \Vert_2^2 \Vert W_j \Vert_2^2}\]</span></p>
-<p>As we can see, there is no <span class="math inline">\(1- \Vert W_i \Vert_2^2\)</span> at all, so there is no reason to explain why we should normalize <span class="math inline">\(\Vert W_i \Vert_2^2=1\)</span>.</p>
-<p>However, they still get the correct conclusion that we should normalize the weight matrix by the <span class="math inline">\(\ell 2\)</span> norm of rows. But the theoretical analysis of the bound is wrong. In fact, the reason why we should normalize the weight matrix is very simple as we wrote above.</p>
+        <h1 id="introduction">1. Introduction</h1>
+<p>A Machine Learning researcher may split the learned model into two catogories, generative model and discriminative model. Convolutional Neural Network is usually seen as a powerful discriminative model. We used to think that the discriminative model have no ability of generating the whole image, just as we human beings, without professional training, we can not draw a picture for even the most familiar friend.</p>
+<p>Now we all know that the CNN based system has surpassed human beings in the ability of recognizing people. So do the discriminative CNNs, which are also not trained with any generative targets, have better ability of drawing portraits? This post will tell you, yes.</p>
+<p>Firstly, we need to find a CNN model which is close to the human beings in recognizing people. Thanks <a href="https://github.com/AlfredXiangWu" target="_blank" rel="external">Wu Xiang</a>. He has provided a model with 98.13% verification rate on LFW, while human beings’ average rate is about 99%. We will use <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">the model</a> he provided for the following experiments.</p>
+<h1 id="method">2. Method</h1>
+<p>If you are interested in Deep Learning, you must know the <a href="http://googleresearch.blogspot.co.id/2015/06/inceptionism-going-deeper-into-neural.html" target="_blank" rel="external">Inceptionism</a>, which have detonated a huge wave of using Neural Networks for art making. Here we will use a similar tool, reversing the neural network. Different from we usually do, giving an image to a CNN model and it tell us this is Susan or Lucy, now we tell the neural network from the tail of CNN that we need Susan’s image. Then by back-propagation, we will finally get an image from the beginning of the CNN model.</p>
+<h1 id="result">3. Result</h1>
+<p>Wu Xiang’s model is trained with <a href="http://www.cbsr.ia.ac.cn/english/CASIA-WebFace-Database.html" target="_blank" rel="external">CASIA-WebFace dataset</a>, which is very huge, containing about 490,000 face images of 10,575 movie stars. Now, let’s see choose some movie stars and see what they look like in computer’s brain:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Bruce Lee</th>
+<th align="center">Mr Bean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png" alt="1"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Yun-Fat Chow</th>
+<th align="center">Anne Hathaway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png" alt="1"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Bingbing Li</th>
+<th align="center">Bingbing Fan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png" alt="1"></td>
+</tr>
+</tbody>
+</table>
+<p>LoL, are these portraits somewhat look like them in the real world? We can see that the CNN have indeedly memorized some features of the training samples, not as the all along prejudice that discriminative model cannot do generating tasks. They can, and do well!</p>
+<p>PS: I can’t wait to show the images generated by a pornography detection system. If you have trained one, please contact me!</p>
+<p>PS2: The codes are on <a href="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis" target="_blank" rel="external">my Github</a>. The face verification model can be found in <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">Wu Xiang’s Github</a>.</p>
 
       
     </div>
@@ -383,12 +347,16 @@ If you are doing research in Deep Learning, you">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/21/Visualize-NN-Complexity/" rel="next" title="Visualize the Complexity of Neural Networks">
+                <i class="fa fa-chevron-left"></i> Visualize the Complexity of Neural Networks
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/21/Visualize-NN-Complexity/" rel="prev" title="Visualize the Complexity of Neural Networks">
-                Visualize the Complexity of Neural Networks <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/22/Normalization-Propagation/" rel="prev" title="Normalization Propagation">
+                Normalization Propagation <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -464,18 +432,11 @@ If you are doing research in Deep Learning, you">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">categories</span>
-              
-            </div>
           
 
           
@@ -533,7 +494,7 @@ If you are doing research in Deep Learning, you">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parametric-layers"><span class="nav-number">2.</span> <span class="nav-text">2. Parametric Layers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#activation-layers"><span class="nav-number">3.</span> <span class="nav-text">3. Activation Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#relu"><span class="nav-number">3.1.</span> <span class="nav-text">1) ReLU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.2.</span> <span class="nav-text">2) Sigmoid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pooling-layer"><span class="nav-number">4.</span> <span class="nav-text">4. Pooling Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dropout-layer"><span class="nav-number">5.</span> <span class="nav-text">5. Dropout Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">6. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#appendices"><span class="nav-number"></span> <span class="nav-text">Appendices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a.-the-formula-fault-of-1"><span class="nav-number">1.</span> <span class="nav-text">A. The formula fault of [1]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">2.</span> <span class="nav-text">2. Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#result"><span class="nav-number">3.</span> <span class="nav-text">3. Result</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -801,9 +762,9 @@ If you are doing research in Deep Learning, you">
 
     <script type="text/javascript">
       var disqus_shortname = 'happynear';
-      var disqus_identifier = '2016/03/21/Normalization-Propagation/';
-      var disqus_title = 'Normalize All Layers';
-      var disqus_url = 'http://saban.wang/2016/03/21/Normalization-Propagation/';
+      var disqus_identifier = '2016/03/22/Face-Visualization/';
+      var disqus_title = 'How do you look like in others' brain?';
+      var disqus_url = 'http://saban.wang/2016/03/22/Face-Visualization/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
