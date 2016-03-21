@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -59,14 +59,14 @@
 
 
 
-<meta name="description" content="title: Visualize the Complexity of Neural Networksdate: 2016-03-21 14:06:31
-tags: Visualization, Deep LearningThis article is from a failed work. If you can read Mandarine, please see this blog for de">
+<meta name="description" content="title: Visualize the Complexity of Neural Networks date: 2016-03-21 14:06:31 tags: Visualization, Deep Learning —
+This article is from a failed work. If you can read Mandarine, please see this blog f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Visualize the Complexity of Neural Networks">
 <meta property="og:url" content="http://saban.wang/2016/03/21/Visualize-NN-Complexity/index.html">
 <meta property="og:site_name" content="Saban's Blog">
-<meta property="og:description" content="title: Visualize the Complexity of Neural Networksdate: 2016-03-21 14:06:31
-tags: Visualization, Deep LearningThis article is from a failed work. If you can read Mandarine, please see this blog for de">
+<meta property="og:description" content="title: Visualize the Complexity of Neural Networks date: 2016-03-21 14:06:31 tags: Visualization, Deep Learning —
+This article is from a failed work. If you can read Mandarine, please see this blog f">
 <meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png">
@@ -76,8 +76,8 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
 <meta property="og:updated_time" content="2016-03-21T08:16:55.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Visualize the Complexity of Neural Networks">
-<meta name="twitter:description" content="title: Visualize the Complexity of Neural Networksdate: 2016-03-21 14:06:31
-tags: Visualization, Deep LearningThis article is from a failed work. If you can read Mandarine, please see this blog for de">
+<meta name="twitter:description" content="title: Visualize the Complexity of Neural Networks date: 2016-03-21 14:06:31 tags: Visualization, Deep Learning —
+This article is from a failed work. If you can read Mandarine, please see this blog f">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png">
 
 
@@ -85,8 +85,8 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -271,21 +271,22 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
       
 
       
-        <p>title: Visualize the Complexity of Neural Networks<br>date: 2016-03-21 14:06:31</p>
-<h2 id="tags-Visualization-Deep-Learning"><a href="#tags-Visualization-Deep-Learning" class="headerlink" title="tags: Visualization, Deep Learning"></a>tags: Visualization, Deep Learning</h2><p>This article is from a failed work. If you can read Mandarine, please see <a href="http://blog.csdn.net/happynear/article/details/46583811" target="_blank" rel="external">this blog</a> for details.<br>I have underestimated the effect of scale &amp; shift in Batch Normalization. <strong>They are very important!</strong></p>
-<p>However, I don’t want this work to be thrown into dust basket. I still think that we can get some interesting and direct feelings from the generated images. </p>
-<h2 id="Brief-Algorithm-Description"><a href="#Brief-Algorithm-Description" class="headerlink" title="Brief Algorithm Description"></a>Brief Algorithm Description</h2><p>Firstly we take an two channel “slope” image as input.</p>
+        <p>title: Visualize the Complexity of Neural Networks date: 2016-03-21 14:06:31 tags: Visualization, Deep Learning —</p>
+<p>This article is from a failed work. If you can read Mandarine, please see <a href="http://blog.csdn.net/happynear/article/details/46583811" target="_blank" rel="external">this blog</a> for details. I have underestimated the effect of scale &amp; shift in Batch Normalization. <strong>They are very important!</strong></p>
+<p>However, I don’t want this work to be thrown into dust basket. I still think that we can get some interesting and direct feelings from the generated images.</p>
+<h2 id="brief-algorithm-description">Brief Algorithm Description</h2>
+<p>Firstly we take an two channel “slope” image as input.</p>
 <table>
 <thead>
-<tr>
-<th>first channel</th>
-<th style="text-align:center">second channel</th>
+<tr class="header">
+<th align="left">first channel</th>
+<th align="center">second channel</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png" alt="1"></td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png" alt="1"></td>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png" alt="1"></td>
 </tr>
 </tbody>
 </table>
@@ -294,35 +295,35 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
 <p>Now we can see how complex the neural network could be. Firstly, with a single layer, 100 hidden channels.</p>
 <table>
 <thead>
-<tr>
-<th>ReLU activation</th>
-<th style="text-align:center">Sigmoid activation</th>
+<tr class="header">
+<th align="left">ReLU activation</th>
+<th align="center">Sigmoid activation</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png" alt="1"></td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_sigmoid.png" alt="1"></td>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_sigmoid.png" alt="1"></td>
 </tr>
 </tbody>
 </table>
 <p>How about 10 layers with 10 hidden channels respectively?</p>
 <table>
 <thead>
-<tr>
-<th>ReLU activation</th>
-<th style="text-align:center">Sigmoid activation</th>
+<tr class="header">
+<th align="left">ReLU activation</th>
+<th align="center">Sigmoid activation</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png" alt="1"></td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_sigmoid.png" alt="1"></td>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_sigmoid.png" alt="1"></td>
 </tr>
 </tbody>
 </table>
 <p>Much more complex, right? Please note that they all have about 100 paramters, but with deeper structure, we produce images with a huge leap in complexity.</p>
-<p>We can also apply other sturctures on the input, such as NIN, VGG, Inception etc, and see what’s the difference of them. </p>
+<p>We can also apply other sturctures on the input, such as NIN, VGG, Inception etc, and see what’s the difference of them.</p>
 <p>The codes are all on <a href="https://github.com/happynear/DeepVisualization/tree/master/NNComplexity" target="_blank" rel="external">my github</a> , you may try them by yourself!</p>
 
       
@@ -434,11 +435,18 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -490,7 +498,7 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-Visualization-Deep-Learning"><span class="nav-number">1.</span> <span class="nav-text">tags: Visualization, Deep Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Brief-Algorithm-Description"><span class="nav-number">2.</span> <span class="nav-text">Brief Algorithm Description</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#brief-algorithm-description"><span class="nav-number">1.</span> <span class="nav-text">Brief Algorithm Description</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -526,7 +534,7 @@ tags: Visualization, Deep LearningThis article is from a failed work. If you can
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
