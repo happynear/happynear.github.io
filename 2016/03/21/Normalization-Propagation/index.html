@@ -276,20 +276,20 @@
 <p>To achieve this, we may scale the weight matrix during feed forward,</p>
 <p>$$\tilde{W_i} = \frac{W_i}{\Vert W_i \Vert _2},$$</p>
 <p>and in back propagation a partial derivative is used:</p>
-<p>$$\frac{\partial \ell}{\partial W_i} =<br>\frac{\frac{\partial \ell}{\partial \tilde{W_i}} -<br>\tilde{W_i}\sum_j{\frac{\partial \ell}{\partial \tilde{W_{ij}}}\tilde{W_{ij}}}}<br>{\Vert W_i \Vert _2}.$$</p>
+<p>$$\frac{\partial \ell}{\partial W_i} =<br>\frac{\frac{\partial \ell}{\partial \tilde{W_i}} -<br>\tilde{W_i}\sum_j{\frac{\partial \ell}{\partial \tilde{W</em>{ij}}}\tilde{W_{ij}}}}<br>{\Vert W_i \Vert _2}.$$</p>
 <p>Or, we can directly use the standard back propagation to update $W$ and force to normalize it after each iteration. Which one is better still need examination by experiment.</p>
 <h2 id="3-Activation-Layers"><a href="#3-Activation-Layers" class="headerlink" title="3. Activation Layers"></a>3. Activation Layers</h2><p>Similar with the paramteric layers, we also require the post-activation values to have zero mean and 1 standard deviation.</p>
 <h3 id="1-ReLU"><a href="#1-ReLU" class="headerlink" title="1) ReLU"></a>1) ReLU</h3><p>We all know that the formula of ReLU is,</p>
 <p>$$y = max(x, 0).$$</p>
 <p>Assuming $x\sim N(0,I)$, we can obtain,</p>
-<p>$$E[y] = \int_{0}^{+\infty}x\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=<br>\frac{1}{\sqrt{2\pi}}\int_{0}^{+\infty}e^{-\frac{x^2}{2}}d\frac{x^2}{2}.$$</p>
+<p>$$E[y] = \int_{0}^{+\infty}x\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=<br>\frac{1}{\sqrt{2\pi}}\int</em>{0}^{+\infty}e^{-\frac{x^2}{2}}d\frac{x^2}{2}.$$</p>
 <p>It can be easily got, $E[y] = \sqrt{\frac{1}{2\pi}}$. Then </p>
-<p>$$E[y^2] = \int_{0}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=<br>\frac{1}{2}\int_{-\infty}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx = \frac{1}{2},$$</p>
+<p>$$E[y^2] = \int_{0}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=<br>\frac{1}{2}\int</em>{-\infty}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx = \frac{1}{2},$$</p>
 <p>$$Var[y] = E[y^2] - E[y]^2=\frac{1}{2} - \frac{1}{2\pi}.$$</p>
 <p>Thus, we should normalize the post-activation of ReLU by substracting $\sqrt{\frac{1}{2\pi}}$ and dividing $\sqrt{\frac{1}{2} - \frac{1}{2\pi}}$.</p>
 <h3 id="2-Sigmoid"><a href="#2-Sigmoid" class="headerlink" title="2) Sigmoid"></a>2) Sigmoid</h3><p>The formula of Sigmoid activation is,</p>
 <p>$$y = \frac{1}{1+e^{-x}},$$</p>
-<p>$$E[y] = \int_{-\infty}^{+\infty}\frac{1}{1+e^{-x}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx \=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2}+\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx +\frac{1}{2}\=0+\frac{1}{2}=\frac{1}{2},$$</p>
+<p>$$E[y] = \int_{-\infty}^{+\infty}\frac{1}{1+e^{-x}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx \\=\int</em>{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2}+\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\\=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx +\frac{1}{2}\\=0+\frac{1}{2}=\frac{1}{2},$$</p>
 <p>$$E[y^2] = \int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}})^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx.$$</p>
 <p>OK, I don’t think we can get a close form of the integral part $E[y^2]$. Please note that we are not using the exact form of the equation. What we need is only an empirical value, so we can got the numbers by simulating. With a huge amount of random values, say 100,000, we can get relatively accurate  means and standard derivations. By running the script in Matlab,</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(100000,1);</span><br><span class="line">y = 1 ./ (1 + exp(-x));</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
@@ -301,8 +301,8 @@
 <h2 id="5-Dropout-Layer"><a href="#5-Dropout-Layer" class="headerlink" title="5. Dropout Layer"></a>5. Dropout Layer</h2><p>Dropout is also a widely used layer in CNN. Although it is claimed to be useless in the NormProp paper, we still would like to record the formulations here. Dropout randomly erase values with a probability of $1-p$. Now we write it into a mathematic form,</p>
 <p>$$y = x \odot r,$$</p>
 <p>where $r\sim Bernoulli(p)$. Thus,</p>
-<p>$$E[y] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{xr_ip_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\=0 * \int_{-\infty}^{+\infty}{x(1-p)\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx + 1 * \int_{-\infty}^{+\infty}{xp\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\=0$$</p>
-<p>$$E[y^2] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{(xr_i)^2p_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\=0+\int_{-\infty}^{+\infty}{x^2p\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\=p$$</p>
+<p>$$E[y] = \sum_{i=0,1}\int</em>{-\infty}^{+\infty}{xr_ip_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\=0 * \int</em>{-\infty}^{+\infty}{x(1-p)\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx + 1 * \int_{-\infty}^{+\infty}{xp\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\=0$$</p>
+<p>$$E[y^2] = \sum_{i=0,1}\int</em>{-\infty}^{+\infty}{(xr_i)^2p_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\=0+\int</em>{-\infty}^{+\infty}{x^2p\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\=p$$</p>
 <p>$$Std[y] = \sqrt{E[y^2]-E[y]^2}=\sqrt{p}$$</p>
 <p>Interestingly, this result is different from what we usually do. We usally preserve values with a ratio of $p$ and divide the preserved values by $p$, too. Now as we calculated, to achieve 1 s.t.d., we should divide the preserved values by $\sqrt{p}$. This inference should be carefully examined by experiment in the future.</p>
 <h2 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6. Conclusion"></a>6. Conclusion</h2><p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and standard deviation divided will become a standard in the near future. When we are creating new layers, we should do one more step of calculating the simulated mean and standard deviation then normalize the output of the new layers.</p>
