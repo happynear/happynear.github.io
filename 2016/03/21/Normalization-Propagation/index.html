@@ -69,7 +69,7 @@ If">
 <meta property="og:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》. Arxiv link :http://arxiv.org/abs/1603.01431 .
 1. Introduction
 If">
-<meta property="og:updated_time" content="2016-03-20T18:24:04.278Z">
+<meta property="og:updated_time" content="2016-03-21T07:30:18.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalize All Layers">
 <meta name="twitter:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》. Arxiv link :http://arxiv.org/abs/1603.01431 .
@@ -331,7 +331,10 @@ If">
 <p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and standard deviation divided will become a standard in the near future. When we are creating new layers, we should do one more step of calculating the simulated mean and standard deviation then normalize the output of the new layers.</p>
 <p>The shortage of this report is that we haven’t considered the back-propagation procedure. In paper [1][4], they claim that by normalizing the s`ingular values of Jacobian matrix to 1 will lead to faster convergency and more numerically stable. I will study them and explore how to integrate the Jacobian normalization into the present normalization method.</p>
 <h2 id="reference">Reference</h2>
-<p>[1] Devansh Arpit, Yingbo Zhou, Bhargava U. Kota, Venu Govindaraju, Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks. http://arxiv.org/abs/1603.01431 [2] Tim Salimans, Diederik P. Kingma, Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks. http://arxiv.org/abs/1602.07868 [3] Sergey Ioffe, Christian Szegedy, Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. http://arxiv.org/abs/1502.03167 [4] Andrew M. Saxe, James L. McClelland, Surya Ganguli, Exact solutions to the nonlinear dynamics of learning in deep linear neural networks. http://arxiv.org/abs/1312.6120</p>
+<p>[1] Devansh Arpit, Yingbo Zhou, Bhargava U. Kota, Venu Govindaraju, Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks. http://arxiv.org/abs/1603.01431</p>
+<p>[2] Tim Salimans, Diederik P. Kingma, Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks. http://arxiv.org/abs/1602.07868</p>
+<p>[3] Sergey Ioffe, Christian Szegedy, Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. http://arxiv.org/abs/1502.03167</p>
+<p>[4] Andrew M. Saxe, James L. McClelland, Surya Ganguli, Exact solutions to the nonlinear dynamics of learning in deep linear neural networks. http://arxiv.org/abs/1312.6120</p>
 <h1 id="appendices">Appendices</h1>
 <h2 id="a.-the-formula-fault-of-1">A. The formula fault of [1]</h2>
 <p>In [1], they present a bound describing the error of using diagnose matrix to approximate a covariance matrix. However, the bound is wrong. They mistake the <span class="math inline">\(\Vert W_i\Vert_2^4\)</span> by <span class="math inline">\(\Vert W_i\Vert_2^2\)</span> in the last line of equation 18.</p>
@@ -429,7 +432,7 @@ If">
                src="/images/default_avatar.jpg"
                alt="Feng Wang" />
           <p class="site-author-name" itemprop="name">Feng Wang</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+          <p class="site-description motion-element" itemprop="description">I am a Ph. D. student at UESTC. My research intrest includes Deep Learning and Facial Image Analysis.</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -461,6 +464,14 @@ If">
                 <a href="https://github.com/happynear" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2548689787/profile" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
                   
                 </a>
               </span>
