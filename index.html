@@ -15,16 +15,19 @@
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 </head>
+
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
@@ -83,20 +86,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://saban.wang/2016/03/21/hello-world/" data-id="cim0wk9130001zoxkf1zkxxdc" class="article-share-link">Share</a>
+      <a data-url="http://saban.wang/2016/03/21/hello-world/" data-id="cim1gczak00013oxk6848x82g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -156,11 +159,11 @@
 <p>$$E[y] = \int<em>{-\infty}^{+\infty}\frac{1}{1+e^{-x}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx \<br>=\int</em>{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2}+\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\<br>=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx +\frac{1}{2}\<br>=0+\frac{1}{2}=\frac{1}{2},$$</p>
 <p>$$E[y^2] = \int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}})^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx.$$</p>
 <p>OK, I don’t think we can get a close form of the integral part $E[y^2]$. Please note that we are not using the exact form of the equation. What we need is only an empirical value, so we can got the numbers by simulating. With a huge amount of random values, say 100,000, we can get relatively accurate  means and standard derivations. By running the script in Matlab,</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(<span class="number">100000,1</span>)<span class="comment">;</span></span><br><span class="line">y = <span class="number">1</span> ./ (<span class="number">1</span> + exp(-x))<span class="comment">;</span></span><br><span class="line">disp([mean(y) std(y)])<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(100000,1);</span><br><span class="line">y = 1 ./ (1 + exp(-x));</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
 <p>We can get Sigmoid’s standard deviation: <strong>0.2083</strong>. This value can be directly wrote into the program to let the post-sigmoid value have 1 standard deviation.</p>
 <h2 id="4-Pooling-Layer"><a href="#4-Pooling-Layer" class="headerlink" title="4. Pooling Layer"></a>4. Pooling Layer</h2><p>There are two types of pooling layer, average-pooling and max-pooling. For the average-pooling layer, it is easy to infer that $E[y] = 0$ and $Std[y] = \frac{1}{\sqrt{n}} = \frac{1}{s}$, where $n$ is the number of neurons in a pooling window or $s$ is the side length of a square pooling window. </p>
 <p>For the max-pooling layer, there is no close form expressions too. We should still using simulated values generated by,</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(<span class="number">10000000</span>, <span class="number">9</span>)<span class="comment">;</span></span><br><span class="line">y = max(<span class="name">x</span>, [], <span class="number">2</span>)<span class="comment">;</span></span><br><span class="line">disp([mean(<span class="name">y</span>) std(<span class="name">y</span>)])<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(10000000, 9);</span><br><span class="line">y = max(x, [], 2);</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
 <p>The mean value of a $3\times3$ max-pooling is <strong>1.4850</strong> and the standard deviation is <strong>0.5978</strong>. For $2\times2$ max-pooling, mean is <strong>1.0291</strong> and standard deviation is <strong>0.7010</strong>.</p>
 <h2 id="5-Dropout-Layer"><a href="#5-Dropout-Layer" class="headerlink" title="5. Dropout Layer"></a>5. Dropout Layer</h2><p>Dropout is also a widely used layer in CNN. Although it is claimed to be useless in the NormProp paper, we still would like to record the formulations here. Dropout randomly erase values with a probability of $1-p$. Now we write it into a mathematic form,</p>
 <p>$$y = x \odot r,$$</p>
@@ -178,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://saban.wang/2016/03/21/Normalization-Propagation/" data-id="cim0wk90t0000zoxkjny1s12t" class="article-share-link">Share</a>
+      <a data-url="http://saban.wang/2016/03/21/Normalization-Propagation/" data-id="cim1gczaf00003oxk207a1kjp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,14 +191,16 @@
 
 
   
-  
+
 </section>
         
           <aside id="sidebar">
   
     
+
   
     
+
   
     
   
@@ -203,14 +208,15 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
+
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -260,7 +266,7 @@
 
   </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -272,7 +278,7 @@
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
