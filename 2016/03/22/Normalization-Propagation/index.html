@@ -59,19 +59,22 @@
 
 
 
-<meta name="description" content="title: Normalizing All Layers： A New Standard? date: 2016-03-22 01:45:15 tags: Deep Learning —
-This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covar">
+<meta name="description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Normalizing All Layers： A New Standard?">
 <meta property="og:url" content="http://saban.wang/2016/03/22/Normalization-Propagation/index.html">
 <meta property="og:site_name" content="Saban's Blog">
-<meta property="og:description" content="title: Normalizing All Layers： A New Standard? date: 2016-03-22 01:45:15 tags: Deep Learning —
-This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covar">
-<meta property="og:updated_time" content="2016-03-22T05:08:21.630Z">
+<meta property="og:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
+<meta property="og:updated_time" content="2016-03-22T05:27:41.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalizing All Layers： A New Standard?">
-<meta name="twitter:description" content="title: Normalizing All Layers： A New Standard? date: 2016-03-22 01:45:15 tags: Deep Learning —
-This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covar">
+<meta name="twitter:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
 
 
 
@@ -264,8 +267,7 @@ This article is a note on 《Normalization Propagation: A Parametric Technique f
       
 
       
-        <p>title: Normalizing All Layers： A New Standard? date: 2016-03-22 01:45:15 tags: Deep Learning —</p>
-<p>This article is a note on <a href="http://arxiv.org/abs/1603.01431" target="_blank" rel="external">《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》</a>.</p>
+        <p>This article is a note on <a href="http://arxiv.org/abs/1603.01431" target="_blank" rel="external">《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》</a>.</p>
 <h2 id="introduction">1. Introduction</h2>
 <p>If you are doing research in Deep Learning, you must know the Batch Normalization[3] techinque, which is a powerful tool to avoid internal covariate shift and gradient vanishing. However, batch normalization only normalize the parametric layers such as convolution layer and innerproduct layer, leaving the chief murderer of gradient vanishing, the activation layers, apart. Another disadvantage of BN is that the it is data-dependent. The network may be unstable when the training samples are in high diversity, or training with small batch size, or our objective is a continuous function such as regression.</p>
 <p>In [1], the authors proposed a new standard that if we feed a uniform gaussian distributed data into a network, all the intermediate output should also be uniform gaussian distribute, or at least <strong>expected</strong> to have zero mean and one standard deviation. In this manner, the data flow of the whole network will be very stable, no numerical vanishment or explosion. Since this method is data-independent, it is suitable for regression task and training with batch size of 1.</p>
