@@ -69,7 +69,7 @@ If you are doing research in Deep Learning, you">
 <meta property="og:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
 1. Introduction
 If you are doing research in Deep Learning, you">
-<meta property="og:updated_time" content="2016-03-22T05:27:41.301Z">
+<meta property="og:updated_time" content="2016-03-23T14:40:25.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalizing All Layers： A New Standard?">
 <meta name="twitter:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
@@ -328,7 +328,7 @@ If you are doing research in Deep Learning, you">
 <p><span class="math display">\[Std[y] = \sqrt{E[y^2]-E[y]^2}=\sqrt{p}\]</span></p>
 <p>Interestingly, this result is different from what we usually do. We usally preserve values with a ratio of <span class="math inline">\(p\)</span> and divide the preserved values by <span class="math inline">\(p\)</span>, too. Now as we calculated, to achieve 1 s.t.d., we should divide the preserved values by <span class="math inline">\(\sqrt{p}\)</span>. This result should be carefully examined by experiment in the future.</p>
 <h2 id="conclusion">6. Conclusion</h2>
-<p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and standard deviation divided will become a standard in the near future. Now we should start to modify our present layers with the new normalization method. When we are creating new layers, one more step should be done, calculating the simulated mean and standard deviation, and then normalize the output of the new layers.</p>
+<p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and s.t.d. divided will become a standard in the near future. Now we should start to modify our present layers with the new normalization method, and when we are creating new layers, we should keep in mind to normalzie it with the method introduced above.</p>
 <p>The shortage of this report is that we haven’t considered the back-propagation procedure. In paper [1][4], they claim that by normalizing the singular values of Jacobian matrix to 1 will lead to faster convergency and more numerically stable. I will study them and explore how to integrate the Jacobian normalization into the present normalization method.</p>
 <h2 id="reference">Reference</h2>
 <p>[1] Devansh Arpit, Yingbo Zhou, Bhargava U. Kota, Venu Govindaraju, <strong>Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks</strong>. <a href="http://arxiv.org/abs/1603.01431" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1603.01431</a></p>
