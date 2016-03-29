@@ -43,7 +43,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Visualization, Deep Learning," />
+  <meta name="keywords" content="Deep Learning," />
 
 
 
@@ -59,23 +59,19 @@
 
 
 
-<meta name="description" content="This article is from a failed work. If you can read Mandarine, please see this blog for details. I have underestimated the effect of scale &amp;amp; shift in Batch Normalization. They are very important!">
+<meta name="description" content="1.Introduction
+In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Visualize the Complexity of Neural Networks">
-<meta property="og:url" content="http://saban.wang/2016/03/21/Visualize-NN-Complexity/index.html">
+<meta property="og:title" content="Normalizing All Layers： Back-Propagation">
+<meta property="og:url" content="http://saban.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/index.html">
 <meta property="og:site_name" content="Saban's Blog">
-<meta property="og:description" content="This article is from a failed work. If you can read Mandarine, please see this blog for details. I have underestimated the effect of scale &amp;amp; shift in Batch Normalization. They are very important!">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_sigmoid.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_sigmoid.png">
-<meta property="og:updated_time" content="2016-03-21T17:46:40.377Z">
+<meta property="og:description" content="1.Introduction
+In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
+<meta property="og:updated_time" content="2016-03-29T02:39:18.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Visualize the Complexity of Neural Networks">
-<meta name="twitter:description" content="This article is from a failed work. If you can read Mandarine, please see this blog for details. I have underestimated the effect of scale &amp;amp; shift in Batch Normalization. They are very important!">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png">
+<meta name="twitter:title" content="Normalizing All Layers： Back-Propagation">
+<meta name="twitter:description" content="1.Introduction
+In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
 
 
 
@@ -93,7 +89,7 @@
   };
 </script>
 
-  <title> Visualize the Complexity of Neural Networks | Saban's Blog </title>
+  <title> Normalizing All Layers： Back-Propagation | Saban's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -213,7 +209,7 @@
             
             
               
-                Visualize the Complexity of Neural Networks
+                Normalizing All Layers： Back-Propagation
               
             
           </h1>
@@ -225,8 +221,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T14:06:31+08:00" content="2016-03-21">
-              2016-03-21
+            <time itemprop="dateCreated" datetime="2016-03-28T23:50:00+08:00" content="2016-03-28">
+              2016-03-28
             </time>
           </span>
 
@@ -236,8 +232,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/21/Visualize-NN-Complexity/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Visualize-NN-Complexity/" itemprop="commentsCount"></span>
+                <a href="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/28/Normalizing-All-Layers：-Back-Propagation/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -247,7 +243,7 @@
 
           
           
-             <span id="/2016/03/21/Visualize-NN-Complexity/" class="leancloud_visitors" data-flag-title="Visualize the Complexity of Neural Networks">
+             <span id="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Back-Propagation">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -268,59 +264,46 @@
       
 
       
-        <p>This article is from a failed work. If you can read Mandarine, please see <a href="http://blog.csdn.net/happynear/article/details/46583811" target="_blank" rel="external">this blog</a> for details. I have underestimated the effect of scale &amp; shift in Batch Normalization. <strong>They are very important!</strong></p>
-<p>However, I don’t want this work to be thrown into dust basket. I still think that we can get some interesting and direct feelings from the generated images.</p>
-<h2 id="brief-algorithm-description">Brief Algorithm Description</h2>
-<p>Firstly we take an two channel “slope” image as input.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">first channel</th>
-<th align="center">second channel</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<p>Then we use a randomly initialized (convolutional) nerual network to wrap the slope input to some more complex shapes. Note that a neural network is continuous function w.r.t. the input, the output will also be a continuous but more complex image.</p>
-<p>In order to control the range of each layers’ output, we add batch normalization after every convolutional layer as introduced in the original paper. BTW, since we have only one input image, the name “batch normalization” is better to be changed to “spatial normalization”. Without the spatial normalization, the range of the output will get exponential increasement or decreasement with the depth, which is not what we want.</p>
-<p>Now we can see how complex the neural network could be. Firstly, with a single layer, 100 hidden channels.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">ReLU activation</th>
-<th align="center">Sigmoid activation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_sigmoid.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<p>How about 10 layers with 10 hidden channels respectively?</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">ReLU activation</th>
-<th align="center">Sigmoid activation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_sigmoid.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<p>Much more complex, right? Please note that they all have about 100 paramters, but with deeper structure, we produce images with a huge leap in complexity.</p>
-<p>We can also apply other sturctures on the input, such as NIN, VGG, Inception etc, and see what’s the difference of them.</p>
-<p>The codes are all on <a href="https://github.com/happynear/DeepVisualization/tree/master/NNComplexity" target="_blank" rel="external">my github</a> , you may try them by yourself!</p>
+        <h1 id="introduction">1.Introduction</h1>
+<p>In the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/">last post</a>, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/#conclusion">Conclusion section</a> claimed, we haven’t considered the back-propagation procedure. In fact, when we talk about the gradient vanishing or exploding problem, we usually refer to the gradients flow in the back-propagation procedure. Since this, the correct way seems to be normalizing all the gradients of neurons, instead of normalizing the forward values.</p>
+<p>In this post, we will discuss how to normalize all the gradients using a similar philosophy with the last post: for a given gradient <span class="math inline">\(dy\sim N(0,I)\)</span>, normalizing the layer to make sure that <span class="math inline">\(dx\)</span> is expected to have zero mean and one standard deviation.</p>
+<h1 id="parametric-layer">2. Parametric Layer</h1>
+<p>Consider the back-propagate fomulation of <code>Convolution</code> and <code>InnerProdcut</code> layer,</p>
+<p><span class="math display">\[dx = W dy,\]</span></p>
+<p>we will get a similar strategy of normalizing each row of <span class="math inline">\(W\)</span> to be on a <span class="math inline">\(\ell 2\)</span> unit ball. Please note that here we normalize through the fan-out dimension of <span class="math inline">\(W\)</span>, not the fan-in dimension in the forward propagation.</p>
+<h1 id="activation-layers">3. Activation Layers</h1>
+<p>One problem that can’t be avoided when calculating the formulations of activations is that we should not only assume the distribution of the gradients, but also the forward input of the activation, because the activations are usually dependent on the inputs. Here we assume that both the input <span class="math inline">\(x\)</span> and the gradient <span class="math inline">\(dy\)</span> follow the normal gaussian distribution <span class="math inline">\(N(0,I)\)</span>, and they are independent with each other.</p>
+<h2 id="relu">1) ReLU</h2>
+<p>The forward formulation of ReLU is,</p>
+<p><span class="math display">\[y = max(0, x).\]</span></p>
+<p>Its backward gradients can be easily obtained:</p>
+<p><span class="math display">\[dx_i = dy_i * \left\{
+\begin{array}{rcl}
+1 &amp; &amp; {x_i &gt; 0}\\
+0 &amp; &amp; {x_i \leq 0}.
+\end{array} \right.\]</span></p>
+<p>When <span class="math inline">\(x\sim N(0,I)\)</span>, the gradient of the ReLU layer can be seen as a Bernoulli distribution with probability of 0.5, so the backward mean and standard deviation formulas are similar with those of Dropout layer,</p>
+<p><span class="math display">\[E[dx] = 0,\]</span></p>
+<p><span class="math display">\[\sigma[dx]=\sqrt{\frac{1}{2}}.\]</span></p>
+<p>Now the question is, we have two different <span class="math inline">\(\sigma\)</span> now, which one should be used to normalize the ReLU layer? My tendency is to use the <span class="math inline">\(\sigma\)</span> calculated by the backward gradients. Moreover, since the bias term is not involved in the backward propagation, it is a good manner to substract the mean <span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span> after ReLU activation.</p>
+<h2 id="sigmoid">2) Sigmoid</h2>
+<p>The backward gradient of Sigmoid activation is,</p>
+<p><span class="math display">\[ dx = y \cdot (1-y).\]</span></p>
+<p>This time, I won’t attempt to calculate the close formulations of mean and std, it is really a tough work. I tend to directly use simulating to get the results.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">y = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(-x));</span><br><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = dy .* y .* (<span class="number">1</span>-y);</span><br><span class="line"><span class="built_in">disp</span>([mean(dx) std(dx)]);</span><br></pre></td></tr></table></figure>
+<p>We can get <span class="math inline">\(E[dx] = 0\)</span> and <span class="math inline">\(\sigma[dx]=0.2123\)</span>. The same with ReLU, we should still minus the <span class="math inline">\(E[y]=0.5\)</span> after Sigmoid activation and use the <span class="math inline">\(\sigma\)</span> calculated by backward gradients, 0.2123.</p>
+<h1 id="pooling-layer">4. Pooling Layer</h1>
+<p>The standard deviation of <span class="math inline">\(3\times3\)</span> average pooling can be simulated by,</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dx = [randn(<span class="number">100000</span>,<span class="number">9</span>) / <span class="number">9</span>];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
+<p>It is <span class="math inline">\(\frac{1}{9}\)</span>, and we can infer that the <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> average pooling is <span class="math inline">\(\frac{1}{4}\)</span>.</p>
+<p>For max pooling, we only pass the gradient to one of the neurons in the pooling window, so we have,</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = [dy zeros(<span class="number">100000</span>,<span class="number">8</span>)];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
+<p>Running the script and we can get <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(3\times3\)</span> is <span class="math inline">\(\frac{1}{3}\)</span> and <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> is <span class="math inline">\(\frac{1}{2}\)</span>.</p>
+<h1 id="dropout-layer">5. Dropout Layer</h1>
+<p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
+<h1 id="conclusion">6. Conclusion</h1>
+<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The standard deviations of the gradients in the mordern CNN are recorded here. Since the bias terms in the gradients of all popular layers are always ignored, so we still use the means of the forward formulations. Using the standard deviations of backward gradients and the mean values of forward datas, the gradients will be expected to be stable, no vanishing nor exploding.</p>
+<p>However, I still don’t quite understand the Jacobian matrix now, maybe the third article will discuss it.</p>
 
       
     </div>
@@ -335,7 +318,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Visualization-Deep-Learning/" rel="tag">#Visualization, Deep Learning</a>
+            <a href="/tags/Deep-Learning/" rel="tag">#Deep Learning</a>
           
         </div>
       
@@ -344,13 +327,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/22/Normalization-Propagation/" rel="next" title="Normalizing All Layers： A New Standard?">
+                <i class="fa fa-chevron-left"></i> Normalizing All Layers： A New Standard?
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/22/Face-Visualization/" rel="prev" title="How do you look like in computers’ brain?">
-                How do you look like in computers’ brain? <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -495,7 +478,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#brief-algorithm-description"><span class="nav-number">1.</span> <span class="nav-text">Brief Algorithm Description</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parametric-layer"><span class="nav-number">2.</span> <span class="nav-text">2. Parametric Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#activation-layers"><span class="nav-number">3.</span> <span class="nav-text">3. Activation Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#relu"><span class="nav-number">3.1.</span> <span class="nav-text">1) ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.2.</span> <span class="nav-text">2) Sigmoid</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pooling-layer"><span class="nav-number">4.</span> <span class="nav-text">4. Pooling Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dropout-layer"><span class="nav-number">5.</span> <span class="nav-text">5. Dropout Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">6. Conclusion</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -763,9 +746,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'happynear';
-      var disqus_identifier = '2016/03/21/Visualize-NN-Complexity/';
-      var disqus_title = 'Visualize the Complexity of Neural Networks';
-      var disqus_url = 'http://saban.wang/2016/03/21/Visualize-NN-Complexity/';
+      var disqus_identifier = '2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
+      var disqus_title = 'Normalizing All Layers： Back-Propagation';
+      var disqus_url = 'http://saban.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
