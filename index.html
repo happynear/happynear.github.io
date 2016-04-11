@@ -305,8 +305,8 @@
 <h1 id="dropout-layer">5. Dropout Layer</h1>
 <p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
 <h1 id="conclusion">6. Conclusion</h1>
-<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The standard deviations of the gradients in the mordern CNN are recorded here. However, when we are using the std of backward gradients, the forward value scale would not be controled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
-<p>So maybe a good choice is to use a seperate scaling method for forward and backward propagation? This idea is conflict with the back-propagation algorithm, so we should still carefully examine it through experiment.</p>
+<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The standard deviations of the gradients in the modern CNN are recorded here. However, when we are using the std of backward gradients, the forward value scale would not be controlled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
+<p>So maybe a good choice is to use a separate scaling method for forward and backward propagation? This idea is conflict with the back-propagation algorithm, so we should still carefully examine it through experiment.</p>
 
           
         
