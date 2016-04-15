@@ -67,7 +67,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 <meta property="og:site_name" content="Saban's Blog">
 <meta property="og:description" content="1.Introduction
 In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
-<meta property="og:updated_time" content="2016-04-11T15:29:24.367Z">
+<meta property="og:updated_time" content="2016-04-15T11:34:48.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalizing All Layers： Back-Propagation">
 <meta name="twitter:description" content="1.Introduction
@@ -302,7 +302,50 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 <h1 id="dropout-layer">5. Dropout Layer</h1>
 <p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
 <h1 id="conclusion">6. Conclusion</h1>
-<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The standard deviations of the gradients in the modern CNN are recorded here. However, when we are using the std of backward gradients, the forward value scale would not be controlled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
+<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The mean and std values of forward and backward data flows are listed here:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Param</th>
+<th align="center">Conv/IP</th>
+<th align="center">ReLU</th>
+<th align="center">Sigmoid</th>
+<th align="center"><span class="math inline">\(3\times3\)</span> Max Pooling</th>
+<th align="center">Ave Pooling</th>
+<th align="center">Dropout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">fp mean</td>
+<td align="center">0</td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{2}\)</span></td>
+<td align="center">1.4850</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">fp std</td>
+<td align="center"><span class="math inline">\(\ell2\)</span> fan-in</td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2} - \frac{1}{2\pi}}\)</span></td>
+<td align="center">0.2083</td>
+<td align="center">0.5978</td>
+<td align="center"><span class="math inline">\(\frac{1}{s}\)</span></td>
+<td align="center"><span class="math inline">\(\sqrt{p}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">bp std</td>
+<td align="center"><span class="math inline">\(\ell2\)</span> fan-out</td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2}}\)</span></td>
+<td align="center">0.2123</td>
+<td align="center"><span class="math inline">\(\frac{1}{3}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{s^2}\)</span></td>
+<td align="center"><span class="math inline">\(\sqrt{p}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>However, here comes another problem that when we are using the std of backward gradients, the forward value scale would not be controlled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
 <p>So maybe a good choice is to use a separate scaling method for forward and backward propagation? This idea is conflict with the back-propagation algorithm, so we should still carefully examine it through experiment.</p>
 
       
