@@ -59,26 +59,21 @@
 
 
 
-<meta name="description" content="1. Introduction
-Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
+<meta name="description" content="In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How do you look like in computers’ brain?">
-<meta property="og:url" content="http://happynear.wang/2016/03/22/Face-Visualization/index.html">
+<meta property="og:title" content="Normalizing All Layers： Stride">
+<meta property="og:url" content="http://happynear.wang/2016/04/19/Normalization-Propagation-Stride/index.html">
 <meta property="og:site_name" content="happynear's blog">
-<meta property="og:description" content="1. Introduction
-Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png">
-<meta property="og:updated_time" content="2016-03-23T14:50:50.491Z">
+<meta property="og:description" content="In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer">
+<meta property="og:image" content="http://happynear.wang/images/stride/stride.png">
+<meta property="og:image" content="http://happynear.wang/images/stride/repeat%20cell.png">
+<meta property="og:image" content="http://happynear.wang/images/stride/normalize%20factor.png">
+<meta property="og:image" content="http://happynear.wang/images/stride/max-pooling%20stride.png">
+<meta property="og:updated_time" content="2016-04-18T17:54:30.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How do you look like in computers’ brain?">
-<meta name="twitter:description" content="1. Introduction
-Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
+<meta name="twitter:title" content="Normalizing All Layers： Stride">
+<meta name="twitter:description" content="In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer">
+<meta name="twitter:image" content="http://happynear.wang/images/stride/stride.png">
 
 
 
@@ -96,7 +91,7 @@ Machine Learning researchers may split the learned model into two catogories, ge
   };
 </script>
 
-  <title> How do you look like in computers’ brain? | happynear's blog </title>
+  <title> Normalizing All Layers： Stride | happynear's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -216,7 +211,7 @@ Machine Learning researchers may split the learned model into two catogories, ge
             
             
               
-                How do you look like in computers’ brain?
+                Normalizing All Layers： Stride
               
             
           </h1>
@@ -228,8 +223,8 @@ Machine Learning researchers may split the learned model into two catogories, ge
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-22T01:32:32+08:00" content="2016-03-22">
-              2016-03-22
+            <time itemprop="dateCreated" datetime="2016-04-19T01:53:53+08:00" content="2016-04-19">
+              2016-04-19
             </time>
           </span>
 
@@ -239,8 +234,8 @@ Machine Learning researchers may split the learned model into two catogories, ge
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/22/Face-Visualization/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/Face-Visualization/" itemprop="commentsCount"></span>
+                <a href="/2016/04/19/Normalization-Propagation-Stride/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/19/Normalization-Propagation-Stride/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -250,7 +245,7 @@ Machine Learning researchers may split the learned model into two catogories, ge
 
           
           
-             <span id="/2016/03/22/Face-Visualization/" class="leancloud_visitors" data-flag-title="How do you look like in computers’ brain?">
+             <span id="/2016/04/19/Normalization-Propagation-Stride/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Stride">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -271,59 +266,35 @@ Machine Learning researchers may split the learned model into two catogories, ge
       
 
       
-        <h1 id="introduction">1. Introduction</h1>
-<p>Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful discriminative model. We used to think that the discriminative model have no ability of generating the whole image, just as we human beings, we cannot draw a vivid picture without professional training.</p>
-<p>Now we all know that the CNN based system has surpassed human beings in the ability of recognizing people. So do the discriminative CNNs have better ability of drawing portraits, even trained with only discriminative signals? This post will tell you the answer.</p>
-<p>Firstly, we need to find a CNN model which is close to the human beings in recognizing people. Thanks <a href="https://github.com/AlfredXiangWu" target="_blank" rel="external">Wu Xiang</a>. He has provided a model with 98.13% verification rate on LFW, while human beings’ average rate is about 99%. We will use <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">the model</a> he provided for the following experiments.</p>
-<h1 id="method">2. Method</h1>
-<p>If you are interested in Deep Learning, you must know the <a href="http://googleresearch.blogspot.co.id/2015/06/inceptionism-going-deeper-into-neural.html" target="_blank" rel="external">Inceptionism</a>, which have raised a huge wave of using Neural Networks for art making. Here we will use a similar tool, reversing the neural network. Different from what we usually do, giving an image to a CNN model and it tell us this is Susan or Lucy, now we will tell the neural network from the tail of CNN that we need Susan’s image. Then by back-propagation, we will finally get an image from the input side of the CNN model.</p>
-<h1 id="result">3. Result</h1>
-<p>Wu Xiang’s model is trained with <a href="http://www.cbsr.ia.ac.cn/english/CASIA-WebFace-Database.html" target="_blank" rel="external">CASIA-WebFace dataset</a>, which is very huge, containing about 490,000 face images of 10,575 movie stars. Now, let’s see choose some movie stars and see what they look like in computer’s brain:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Bruce Lee</th>
-<th align="center">Mr Bean</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Yun-Fat Chow</th>
-<th align="center">Anne Hathaway</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Bingbing Li</th>
-<th align="center">Bingbing Fan</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png" alt="1"></td>
-<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png" alt="1"></td>
-</tr>
-</tbody>
-</table>
-<p>LoL, are these portraits somewhat look like them in the real world? We can see that the CNN have indeedly memorized some features of the training samples, not as the all along prejudice that discriminative model cannot do generating tasks. They can, and do well!</p>
-<p>PS: I can’t wait to show the images generated by a pornography detection system. If you have trained one, please contact me!</p>
-<p>PS2: The codes are on <a href="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis" target="_blank" rel="external">my Github</a>. The face verification model can be found in <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">Wu Xiang’s Github</a>.</p>
+        <p>In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer. It is not a easy task so I tend to open a new post to discuss it.</p>
+<p>In this article, we are looking at a convolution layer or pooling layer with <span class="math inline">\(w\times w\)</span> window and <span class="math inline">\(s\times s\)</span> stride. These two symbols are all the same in the following paragraphs. We will use FP to infer to the forward propagation and BP for backward propagation in short.</p>
+<p>In the FP, we do not need to consider the stride parameter because every output pixel accumulates values from all input pixels of <span class="math inline">\(w\times w\)</span>, no matter how much pixel strides are applied. However, in the BP procedure, each output pixel (input in FP) correspond to only a small subset of input pixels. Different from striding on the feature map during FP, we do stride on the kernel in BP. I have drawn a picture to illustrate this procedure.</p>
+<div class="figure">
+<img src="http://happynear.wang/images/stride/stride.png" alt="stride">
+<p class="caption">stride</p>
+</div>
+<p>As shown above, a input feature map is convolved by a <span class="math inline">\(3\times 3\)</span> filter with <span class="math inline">\(2\times 2\)</span> stride. We can see that different values on input map are participate in the convolution with different times. <code>7</code>, <code>9</code>, <code>17</code>, <code>19</code> are convolved only once, while <code>13</code> convolved <span class="math inline">\(4\)</span> times. Since BP is actually the inverse procedure of FP in convolution layer, if the kernel is all flat, the graident at position <code>7</code> will be <span class="math inline">\(4\)</span> times smaller compared with the gradient at position <code>13</code>.</p>
+<p>There are two ways to normalize the output gradient. The first one is to scale the entire output gradient map. Please note that the <code>Multiplication Count</code> is constituted by some repeated cells, e.g. [4 2; 2 1] in the above figure. Then we can calculate the std of the output gradient:</p>
+<p><span class="math display">\[Std[dx] = \sqrt{\frac{1}{4}(4^2 + 2^2+2^2+1^2)} = \frac{5}{2}.\]</span></p>
+<p>Don’t forget that we have normalized the filter to have unit <span class="math inline">\(\ell 2\)</span> norm, i.e. we have already divided all the values in the filter by 3 in the above circumstance (channel = 1). So the final correction factor is <span class="math inline">\(\frac{5}{6}\)</span>, we should divide the <span class="math inline">\(\ell 2\)</span> normalized gradients by this value. Other repeated cells used by general network are recorded below.</p>
+<div class="figure">
+<img src="http://happynear.wang/images/stride/repeat%20cell.png" alt="repeat_cell">
+<p class="caption">repeat_cell</p>
+</div>
+<p>Another way is to normalize the values in the filters. Since we can modify the filters arbitarily, we may rescale each value in the filter matrix separately. The corners, which are shared by <span class="math inline">\(4\)</span> convolution windows as illustrated in the first figure, need to multiply a factor of <span class="math inline">\(\frac{1}{4}\)</span>. Similarly, we should scale the edge values by <span class="math inline">\(\frac{1}{2}\)</span> and keep the central values unscaled because each of them only locates in one convolution window. The normalize factors of some small kernels are listed below.</p>
+<div class="figure">
+<img src="http://happynear.wang/images/stride/normalize%20factor.png" alt="repeat_cell">
+<p class="caption">repeat_cell</p>
+</div>
+<p>Analysis of the stride parameter in the average pooling layer is similar. Since it can be seen as convolution layer with flatten filters, the normalization strategy is the same with the first method we discussed above, scaling the whole gradient map by a specified value w.r.t the <span class="math inline">\(w\)</span> and <span class="math inline">\(s\)</span>.</p>
+<p>For max-pooling layers, things get different. There is a special case that the max value can be taken from the same position on the feature map but in different window. This circumstance is very common because the image is usually continuous, a maximum value may be the only extreme value in a large region. Look at the two cases below. The max values are taken from different positions in the left case while the two windows share the same max value in the right case. The scale factor will be very different if we still use std as our measurement.</p>
+<div class="figure">
+<img src="http://happynear.wang/images/stride/max-pooling%20stride.png" alt="repeat_cell">
+<p class="caption">repeat_cell</p>
+</div>
+<p>One solution is to use MAD(Mean Abs Deviation) instead of standard deviation as the measurement for the scale. The formulation of MAD is</p>
+<p><span class="math display">\[ MAD(x) = \frac{1}{N}\sum_i^N{|x_i-E[x]|}.\]</span></p>
+<p>To be compatible with MAD, we need to change our hypothesis introduced in the last two posts from Gaussian distribution to Laplacian distribution. This will be a big work and I will write the derivation of the formulations in the next post.</p>
 
       
     </div>
@@ -347,17 +318,13 @@ Machine Learning researchers may split the learned model into two catogories, ge
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/21/Visualize-NN-Complexity/" rel="next" title="Visualize the Complexity of Neural Networks">
-                <i class="fa fa-chevron-left"></i> Visualize the Complexity of Neural Networks
+              <a href="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/" rel="next" title="Normalizing All Layers： Back-Propagation">
+                <i class="fa fa-chevron-left"></i> Normalizing All Layers： Back-Propagation
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/22/Normalization-Propagation/" rel="prev" title="Normalizing All Layers： A New Standard?">
-                Normalizing All Layers： A New Standard? <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -502,7 +469,7 @@ Machine Learning researchers may split the learned model into two catogories, ge
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">2.</span> <span class="nav-text">2. Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#result"><span class="nav-number">3.</span> <span class="nav-text">3. Result</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -770,9 +737,9 @@ Machine Learning researchers may split the learned model into two catogories, ge
 
     <script type="text/javascript">
       var disqus_shortname = 'happynear';
-      var disqus_identifier = '2016/03/22/Face-Visualization/';
-      var disqus_title = 'How do you look like in computers’ brain?';
-      var disqus_url = 'http://happynear.wang/2016/03/22/Face-Visualization/';
+      var disqus_identifier = '2016/04/19/Normalization-Propagation-Stride/';
+      var disqus_title = 'Normalizing All Layers： Stride';
+      var disqus_url = 'http://happynear.wang/2016/04/19/Normalization-Propagation-Stride/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
