@@ -271,27 +271,27 @@
 <p>In this article, we are looking at a convolution layer or pooling layer with <span class="math inline">\(w\times w\)</span> window and <span class="math inline">\(s\times s\)</span> stride. These two symbols are all the same in the following paragraphs. We will use FP to infer to the forward propagation and BP for backward propagation in short.</p>
 <p>In the FP, we do not need to consider the stride parameter because every output pixel accumulates values from all input pixels of <span class="math inline">\(w\times w\)</span>, no matter how much pixel strides are applied. However, in the BP procedure, each output pixel (input in FP) correspond to only a small subset of input pixels. Different from striding on the feature map during FP, we do stride on the kernel in BP. I have drawn a picture to illustrate this procedure.</p>
 <div class="figure">
-<img src="http://happynear.wang/images/stride/stride.png" alt="stride">
-<p class="caption">stride</p>
+<img src="http://happynear.wang/images/stride/stride.png" alt="Figure 1. Illustration of the role of the stride parameter.">
+<p class="caption">Figure 1. Illustration of the role of the stride parameter.</p>
 </div>
 <p>As shown above, a input feature map is convolved by a <span class="math inline">\(3\times 3\)</span> filter with <span class="math inline">\(2\times 2\)</span> stride. We can see that different values on input map are participate in the convolution with different times. <code>7</code>, <code>9</code>, <code>17</code>, <code>19</code> are convolved only once, while <code>13</code> convolved <span class="math inline">\(4\)</span> times. Since BP is actually the inverse procedure of FP in convolution layer, if the kernel is all flat, the graident at position <code>7</code> will be <span class="math inline">\(4\)</span> times smaller compared with the gradient at position <code>13</code>.</p>
 <p>There are two ways to normalize the output gradient. The first one is to scale the entire output gradient map. Please note that the <code>Multiplication Count</code> is constituted by some repeated cells, e.g. [4 2; 2 1] in the above figure. Then we can calculate the std of the output gradient:</p>
 <p><span class="math display">\[Std[dx] = \sqrt{\frac{1}{4}(4^2 + 2^2+2^2+1^2)} = \frac{5}{2}.\]</span></p>
 <p>Don’t forget that we have normalized the filter to have unit <span class="math inline">\(\ell 2\)</span> norm, i.e. we have already divided all the values in the filter by 3 in the above circumstance (channel = 1). So the final correction factor is <span class="math inline">\(\frac{5}{6}\)</span>, we should divide the <span class="math inline">\(\ell 2\)</span> normalized gradients by this value. Other repeated cells used by general network are recorded below.</p>
 <div class="figure">
-<img src="http://happynear.wang/images/stride/repeat%20cell.png" alt="repeat_cell">
-<p class="caption">repeat_cell</p>
+<img src="http://happynear.wang/images/stride/repeat%20cell.png" alt="Figure 2. Repeated cells of some generally used w and s">
+<p class="caption">Figure 2. Repeated cells of some generally used <span class="math inline">\(w\)</span> and <span class="math inline">\(s\)</span></p>
 </div>
 <p>Another way is to normalize the values in the filters. Since we can modify the filters arbitarily, we may rescale each value in the filter matrix separately. The corners, which are shared by <span class="math inline">\(4\)</span> convolution windows as illustrated in the first figure, need to multiply a factor of <span class="math inline">\(\frac{1}{4}\)</span>. Similarly, we should scale the edge values by <span class="math inline">\(\frac{1}{2}\)</span> and keep the central values unscaled because each of them only locates in one convolution window. The normalize factors of some small kernels are listed below.</p>
 <div class="figure">
-<img src="http://happynear.wang/images/stride/normalize%20factor.png" alt="repeat_cell">
-<p class="caption">repeat_cell</p>
+<img src="http://happynear.wang/images/stride/normalize%20factor.png" alt="Figure 3. Normalize factors of some generally used w and s">
+<p class="caption">Figure 3. Normalize factors of some generally used <span class="math inline">\(w\)</span> and <span class="math inline">\(s\)</span></p>
 </div>
 <p>Analysis of the stride parameter in the average pooling layer is similar. Since it can be seen as convolution layer with flatten filters, the normalization strategy is the same with the first method we discussed above, scaling the whole gradient map by a specified value w.r.t the <span class="math inline">\(w\)</span> and <span class="math inline">\(s\)</span>.</p>
 <p>For max-pooling layers, things get different. There is a special case that the max value can be taken from the same position on the feature map but in different window. This circumstance is very common because the image is usually continuous, a maximum value may be the only extreme value in a large region. Look at the two cases below. The max values are taken from different positions in the left case while the two windows share the same max value in the right case. The scale factor will be very different if we still use std as our measurement.</p>
 <div class="figure">
-<img src="http://happynear.wang/images/stride/max-pooling%20stride.png" alt="repeat_cell">
-<p class="caption">repeat_cell</p>
+<img src="http://happynear.wang/images/stride/max-pooling%20stride.png" alt="Figure 4. Two different cases of the max values’ positions. Where the max values are taken is marked by 1.">
+<p class="caption">Figure 4. Two different cases of the max values’ positions. Where the max values are taken is marked by 1.</p>
 </div>
 <p>One solution is to use MAD(Mean Abs Deviation) instead of standard deviation as the measurement for the scale. The formulation of MAD is</p>
 <p><span class="math display">\[ MAD(x) = \frac{1}{N}\sum_i^N{|x_i-E[x]|}.\]</span></p>
