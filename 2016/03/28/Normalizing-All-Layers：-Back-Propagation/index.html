@@ -63,11 +63,11 @@
 In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Normalizing All Layers： Back-Propagation">
-<meta property="og:url" content="http://saban.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/index.html">
-<meta property="og:site_name" content="Saban's Blog">
+<meta property="og:url" content="http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/index.html">
+<meta property="og:site_name" content="happynear's blog">
 <meta property="og:description" content="1.Introduction
 In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
-<meta property="og:updated_time" content="2016-04-15T11:34:48.304Z">
+<meta property="og:updated_time" content="2016-04-15T14:15:23.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalizing All Layers： Back-Propagation">
 <meta name="twitter:description" content="1.Introduction
@@ -89,7 +89,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
   };
 </script>
 
-  <title> Normalizing All Layers： Back-Propagation | Saban's Blog </title>
+  <title> Normalizing All Layers： Back-Propagation | happynear's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -120,7 +120,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Saban's Blog</span>
+      <span class="site-title">happynear's blog</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -265,7 +265,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 
       
         <h1 id="introduction">1.Introduction</h1>
-<p>In the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/">last post</a>, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/#conclusion">Conclusion section</a> claimed, we haven’t considered the back-propagation procedure. In fact, when we talk about the gradient vanishing or exploding problem, we usually refer to the gradients flow in the back-propagation procedure. Since this, the correct way seems to be normalizing the backward gradients of neurons, instead of the forward values.</p>
+<p>In the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/" target="_blank" rel="external">last post</a>, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/#conclusion" target="_blank" rel="external">Conclusion section</a> claimed, we haven’t considered the back-propagation procedure. In fact, when we talk about the gradient vanishing or exploding problem, we usually refer to the gradients flow in the back-propagation procedure. Since this, the correct way seems to be normalizing the backward gradients of neurons, instead of the forward values.</p>
 <p>In this post, we will discuss how to normalize all the gradients using a similar philosophy with the last post: for a given gradient <span class="math inline">\(dy\sim N(0,I)\)</span>, normalizing the layer to make sure that <span class="math inline">\(dx\)</span> is expected to have zero mean and one standard deviation.</p>
 <h1 id="parametric-layer">2. Parametric Layer</h1>
 <p>Consider the back-propagate fomulation of <code>Convolution</code> and <code>InnerProdcut</code> layer,</p>
@@ -332,7 +332,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 <td align="center">0.2083</td>
 <td align="center">0.5978</td>
 <td align="center"><span class="math inline">\(\frac{1}{s}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{p}\)</span></td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
 </tr>
 <tr class="odd">
 <td align="center">bp std</td>
@@ -341,7 +341,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 <td align="center">0.2123</td>
 <td align="center"><span class="math inline">\(\frac{1}{3}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{1}{s^2}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{p}\)</span></td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -791,7 +791,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
       var disqus_shortname = 'happynear';
       var disqus_identifier = '2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
       var disqus_title = 'Normalizing All Layers： Back-Propagation';
-      var disqus_url = 'http://saban.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
+      var disqus_url = 'http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
