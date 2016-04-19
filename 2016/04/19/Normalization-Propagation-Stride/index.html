@@ -69,7 +69,7 @@
 <meta property="og:image" content="http://happynear.wang/images/stride/repeat%20cell.png">
 <meta property="og:image" content="http://happynear.wang/images/stride/normalize%20factor.png">
 <meta property="og:image" content="http://happynear.wang/images/stride/max-pooling%20stride.png">
-<meta property="og:updated_time" content="2016-04-18T18:00:06.151Z">
+<meta property="og:updated_time" content="2016-04-19T04:37:43.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Normalizing All Layers： Stride">
 <meta name="twitter:description" content="In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer">
@@ -266,7 +266,7 @@
       
 
       
-        <p>In the last post, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer. It is not a easy task so I tend to open a new post to discuss it.</p>
+        <p>In the <a href="http://happynear.wang/2016/03/28/Normalizing-All-Layers%EF%BC%9A-Back-Propagation/">last post</a>, we have discussed how to normalize the gradients in the back propagate procedure. However, we leftover a problem about the stride parameter of the convolution layer and pooling layer. It is not a easy task so I tend to open a new post to discuss it.</p>
 <p>In this article, we are looking at a convolution layer or pooling layer with <span class="math inline">\(w\times w\)</span> window and <span class="math inline">\(s\times s\)</span> stride. These two symbols are all the same in the following paragraphs. We will use FP to infer to the forward propagation and BP for backward propagation in short.</p>
 <p>In the FP, we do not need to consider the stride parameter because every output pixel accumulates values from all input pixels of <span class="math inline">\(w\times w\)</span>, no matter how much pixel strides are applied. However, in the BP procedure, each output pixel (input in FP) correspond to only a small subset of input pixels. Different from striding on the feature map during FP, we do stride on the kernel in BP. I have drawn a picture to illustrate this procedure.</p>
 <div class="figure">
@@ -289,12 +289,12 @@
 <p>Analysis of the stride parameter in the average pooling layer is similar. Since it can be seen as convolution layer with flatten filters, the normalization strategy is the same with the first method we discussed above, scaling the whole gradient map by a specified value w.r.t the <span class="math inline">\(w\)</span> and <span class="math inline">\(s\)</span>.</p>
 <p>For max-pooling layers, things get different. There is a special case that the max value can be taken from the same position on the feature map but in different window. This circumstance is very common because the image is usually continuous, a maximum value may be the only extreme value in a large region. Look at the two cases below. The max values are taken from different positions in the left case while the two windows share the same max value in the right case. The scale factor will be very different if we still use std as our measurement.</p>
 <div class="figure">
-<img src="http://happynear.wang/images/stride/max-pooling%20stride.png" alt="Figure 4. Two different cases of the max values’ positions. Where the max values are taken is marked by 1.">
-<p class="caption">Figure 4. Two different cases of the max values’ positions. Where the max values are taken is marked by 1.</p>
+<img src="http://happynear.wang/images/stride/max-pooling%20stride.png" alt="Figure 4. Two different cases of the max values’ positions. Cells where the max values are taken are marked by 1.">
+<p class="caption">Figure 4. Two different cases of the max values’ positions. Cells where the max values are taken are marked by 1.</p>
 </div>
 <p>One solution is to use MAD(Mean Abs Deviation) instead of standard deviation as the measurement for the scale. The formulation of MAD is</p>
 <p><span class="math display">\[ MAD(x) = \frac{1}{N}\sum_i^N{|x_i-E[x]|}.\]</span></p>
-<p>To be compatible with MAD, we need to change our hypothesis introduced in the last two posts from Gaussian distribution to Laplacian distribution. This will be a big work and I will write the derivation of the formulations in the next post.</p>
+<p>To be compatible with MAD, we need to change our hypothesis introduced in the last two posts from Gaussian distribution to Laplacian distribution. This will be a huge work and I will write the derivation of the formulations in the next post.</p>
 
       
     </div>
