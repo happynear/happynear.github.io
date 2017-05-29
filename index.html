@@ -208,7 +208,233 @@
             
               
                 
-                <a class="post-title-link" href="/2016/04/18/Normalization-Propagation-Stride/" itemprop="url">
+                <a class="post-title-link" href="/2017/05/29/Mirror-Face/" itemprop="url">
+                  Mirror Face
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-05-29T14:32:17-04:00" content="2017-05-29">
+              2017-05-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/29/Mirror-Face/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/29/Mirror-Face/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/29/Mirror-Face/" class="leancloud_visitors" data-flag-title="Mirror Face">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mirror-face">Mirror Face</h1>
+<p>It seems that many friends are curious about the mirror face trick. I am writing this technical report to describe it with more details.</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/happynear/NormFace/master/mirror.png" alt="mirror">
+<p class="caption">mirror</p>
+</div>
+<p>Mirror face is (one of) the most effective prior for face image analysis. It extracts features from the frontal face and mirror face simultaneously and merge the two features together as the final feature. A sample network is in <a href="https://github.com/happynear/NormFace/blob/master/prototxt/example_of_mirror_face.prototxt" target="_blank" rel="external">FaceNormGithub/prototxt/example_of_mirror_face.prototxt</a>.</p>
+<p>Mirror face can be trained in an end-to-end manner. However, I find it has no help on <strong>training</strong> face verification models. It can improve the performance of face identification, but when I applied it on face verification, the accuracy even decreased:(</p>
+<p>Here are the accuracies using <a href="https://github.com/ydwen/caffe-face" target="_blank" rel="external">Wen’s model</a> with different feature merging strategy. We didn’t put these tables into our paper because we thought this was only a trick.</p>
+<table>
+<thead>
+<tr class="header">
+<th>PCA?</th>
+<th align="center">Front only</th>
+<th align="center">Concatenate</th>
+<th align="center">Element-wise SUM</th>
+<th align="center">Element-wise MAX</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No  </td>
+<td align="center">98.5%</td>
+<td align="center">98.53%</td>
+<td align="center">98.63%</td>
+<td align="center">98.67%</td>
+</tr>
+<tr class="even">
+<td>YES</td>
+<td align="center">98.8%</td>
+<td align="center">98.92%</td>
+<td align="center">98.93%</td>
+<td align="center">98.95%</td>
+</tr>
+</tbody>
+</table>
+<p>With my model:</p>
+<table>
+<thead>
+<tr class="header">
+<th>PCA?</th>
+<th align="center">Front only</th>
+<th align="center">Concatenate</th>
+<th align="center">Element-wise SUM</th>
+<th align="center">Element-wise MAX</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No  </td>
+<td align="center">98.77%</td>
+<td align="center">99.03%</td>
+<td align="center">99.02%</td>
+<td align="center">99%</td>
+</tr>
+<tr class="even">
+<td>YES</td>
+<td align="center">98.96%</td>
+<td align="center">99.17%</td>
+<td align="center">99.2167%</td>
+<td align="center">99.2167%</td>
+</tr>
+</tbody>
+</table>
+<p>And with <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">Wu’s Light CNN B</a>:</p>
+<table>
+<thead>
+<tr class="header">
+<th>PCA?</th>
+<th align="center">Front only</th>
+<th align="center">Concatenate</th>
+<th align="center">Element-wise SUM</th>
+<th align="center">Element-wise MAX</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No  </td>
+<td align="center">98.10%</td>
+<td align="center">98.35%</td>
+<td align="center">98.42%</td>
+<td align="center">98.35%</td>
+</tr>
+<tr class="even">
+<td>YES</td>
+<td align="center">98.41%</td>
+<td align="center">98.63%</td>
+<td align="center">98.61%</td>
+<td align="center">98.63%</td>
+</tr>
+</tbody>
+</table>
+<p>With my model:</p>
+<table>
+<thead>
+<tr class="header">
+<th>PCA?</th>
+<th align="center">Front only</th>
+<th align="center">Concatenate</th>
+<th align="center">Element-wise SUM</th>
+<th align="center">Element-wise MAX</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No  </td>
+<td align="center">98.48%</td>
+<td align="center">98.73%</td>
+<td align="center">98.78%</td>
+<td align="center">98.78%</td>
+</tr>
+<tr class="even">
+<td>YES</td>
+<td align="center">98.45%</td>
+<td align="center">98.55%</td>
+<td align="center">98.65%</td>
+<td align="center">98.62%</td>
+</tr>
+</tbody>
+</table>
+<p>It’s strange that with my C-contrastive loss, the performance of <code>No PCA</code> is better… Anyway, in Wu’s paper, he didn’t use PCA either. So there is nothing wrong with what I said in my paper: “I follow all the experiment settings of the original paper”.</p>
+<p>To sum up, the mirror face trick is effective on most of models (actually I never see cases that mirror face does not work). However, we are lacking of theoretical explanation for it. Now we can only explain it as model ensemble. Whether to use SUM or MAX, how to train it end-to-endly in face verification models, these are still open problems. Hope this report can inspire people to do further research.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/19/Normalization-Propagation-Stride/" itemprop="url">
                   Normalizing All Layers： Stride
                 </a>
               
@@ -222,8 +448,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-18T13:53:53-04:00" content="2016-04-18">
-              2016-04-18
+            <time itemprop="dateCreated" datetime="2016-04-19T01:53:53-04:00" content="2016-04-19">
+              2016-04-19
             </time>
           </span>
 
@@ -233,8 +459,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/18/Normalization-Propagation-Stride/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/18/Normalization-Propagation-Stride/" itemprop="commentsCount"></span>
+                <a href="/2016/04/19/Normalization-Propagation-Stride/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/19/Normalization-Propagation-Stride/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -244,7 +470,7 @@
 
           
           
-             <span id="/2016/04/18/Normalization-Propagation-Stride/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Stride">
+             <span id="/2016/04/19/Normalization-Propagation-Stride/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Stride">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -355,7 +581,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T11:50:00-04:00" content="2016-03-28">
+            <time itemprop="dateCreated" datetime="2016-03-28T23:50:00-04:00" content="2016-03-28">
               2016-03-28
             </time>
           </span>
@@ -439,7 +665,16 @@
 <p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
 <h1 id="conclusion">6. Conclusion</h1>
 <p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The mean and std values of forward and backward data flows are listed here:</p>
-<table>
+<table style="width:85%;">
+<colgroup>
+<col width="9%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">Param</th>
@@ -528,7 +763,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/21/Normalization-Propagation/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/22/Normalization-Propagation/" itemprop="url">
                   Normalizing All Layers： A New Standard?
                 </a>
               
@@ -542,8 +777,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T13:45:15-04:00" content="2016-03-21">
-              2016-03-21
+            <time itemprop="dateCreated" datetime="2016-03-22T01:45:15-04:00" content="2016-03-22">
+              2016-03-22
             </time>
           </span>
 
@@ -553,8 +788,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/21/Normalization-Propagation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Normalization-Propagation/" itemprop="commentsCount"></span>
+                <a href="/2016/03/22/Normalization-Propagation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/Normalization-Propagation/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -564,7 +799,7 @@
 
           
           
-             <span id="/2016/03/21/Normalization-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： A New Standard?">
+             <span id="/2016/03/22/Normalization-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： A New Standard?">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -706,7 +941,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/21/Face-Visualization/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/22/Face-Visualization/" itemprop="url">
                   What do you look like in computers’ brain?
                 </a>
               
@@ -720,8 +955,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T13:32:32-04:00" content="2016-03-21">
-              2016-03-21
+            <time itemprop="dateCreated" datetime="2016-03-22T01:32:32-04:00" content="2016-03-22">
+              2016-03-22
             </time>
           </span>
 
@@ -731,8 +966,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/21/Face-Visualization/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Face-Visualization/" itemprop="commentsCount"></span>
+                <a href="/2016/03/22/Face-Visualization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/Face-Visualization/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -742,7 +977,7 @@
 
           
           
-             <span id="/2016/03/21/Face-Visualization/" class="leancloud_visitors" data-flag-title="What do you look like in computers’ brain?">
+             <span id="/2016/03/22/Face-Visualization/" class="leancloud_visitors" data-flag-title="What do you look like in computers’ brain?">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -776,13 +1011,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">Bruce Lee</th>
+<th>Bruce Lee</th>
 <th align="center">Mr Bean</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png" alt="1"></td>
 </tr>
 </tbody>
@@ -790,13 +1025,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">Yun-Fat Chow</th>
+<th>Yun-Fat Chow</th>
 <th align="center">Anne Hathaway</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png" alt="1"></td>
 </tr>
 </tbody>
@@ -804,13 +1039,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">Bingbing Li</th>
+<th>Bingbing Li</th>
 <th align="center">Bingbing Fan</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png" alt="1"></td>
 </tr>
 </tbody>
@@ -882,7 +1117,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T02:06:31-04:00" content="2016-03-21">
+            <time itemprop="dateCreated" datetime="2016-03-21T14:06:31-04:00" content="2016-03-21">
               2016-03-21
             </time>
           </span>
@@ -934,13 +1169,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">first channel</th>
+<th>first channel</th>
 <th align="center">second channel</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/vert.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/hori.png" alt="1"></td>
 </tr>
 </tbody>
@@ -951,13 +1186,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">ReLU activation</th>
+<th>ReLU activation</th>
 <th align="center">Sigmoid activation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_relu.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/1conv_sigmoid.png" alt="1"></td>
 </tr>
 </tbody>
@@ -966,13 +1201,13 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">ReLU activation</th>
+<th>ReLU activation</th>
 <th align="center">Sigmoid activation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png" alt="1"></td>
+<td><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_relu.png" alt="1"></td>
 <td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/NNComplexity/img/10conv_sigmoid.png" alt="1"></td>
 </tr>
 </tbody>
@@ -1046,7 +1281,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1056,7 +1291,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1089,6 +1324,14 @@
                 <a href="./cv.html" target="_blank">
                   
                     <i class="fa fa-globe"></i> CV
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:feng.wff@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Mail
                   
                 </a>
               </span>
