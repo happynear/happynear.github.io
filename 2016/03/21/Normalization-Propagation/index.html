@@ -59,19 +59,22 @@
 
 
 
-<meta name="description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
+<meta name="description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Normalizing All Layers： Back-Propagation">
-<meta property="og:url" content="http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/index.html">
+<meta property="og:title" content="Normalizing All Layers： A New Standard?">
+<meta property="og:url" content="http://happynear.wang/2016/03/21/Normalization-Propagation/index.html">
 <meta property="og:site_name" content="happynear's blog">
-<meta property="og:description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
-<meta property="og:updated_time" content="2016-04-15T14:15:23.941Z">
+<meta property="og:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
+<meta property="og:updated_time" content="2016-03-23T14:40:25.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Normalizing All Layers： Back-Propagation">
-<meta name="twitter:description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
+<meta name="twitter:title" content="Normalizing All Layers： A New Standard?">
+<meta name="twitter:description" content="This article is a note on 《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》.
+1. Introduction
+If you are doing research in Deep Learning, you">
 
 
 
@@ -89,7 +92,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
   };
 </script>
 
-  <title> Normalizing All Layers： Back-Propagation | happynear's blog </title>
+  <title> Normalizing All Layers： A New Standard? | happynear's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -209,7 +212,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
             
             
               
-                Normalizing All Layers： Back-Propagation
+                Normalizing All Layers： A New Standard?
               
             
           </h1>
@@ -221,8 +224,8 @@ In the last post, we discussed how to make all neurons of a neural network to ha
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T11:50:00-04:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-03-21T13:45:15-04:00" content="2016-03-21">
+              2016-03-21
             </time>
           </span>
 
@@ -232,8 +235,8 @@ In the last post, we discussed how to make all neurons of a neural network to ha
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/28/Normalizing-All-Layers：-Back-Propagation/" itemprop="commentsCount"></span>
+                <a href="/2016/03/21/Normalization-Propagation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Normalization-Propagation/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -243,7 +246,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 
           
           
-             <span id="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Back-Propagation">
+             <span id="/2016/03/21/Normalization-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： A New Standard?">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -264,89 +267,80 @@ In the last post, we discussed how to make all neurons of a neural network to ha
       
 
       
-        <h1 id="introduction">1.Introduction</h1>
-<p>In the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/" target="_blank" rel="external">last post</a>, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/#conclusion" target="_blank" rel="external">Conclusion section</a> claimed, we haven’t considered the back-propagation procedure. In fact, when we talk about the gradient vanishing or exploding problem, we usually refer to the gradients flow in the back-propagation procedure. Since this, the correct way seems to be normalizing the backward gradients of neurons, instead of the forward values.</p>
-<p>In this post, we will discuss how to normalize all the gradients using a similar philosophy with the last post: for a given gradient <span class="math inline">\(dy\sim N(0,I)\)</span>, normalizing the layer to make sure that <span class="math inline">\(dx\)</span> is expected to have zero mean and one standard deviation.</p>
-<h1 id="parametric-layer">2. Parametric Layer</h1>
-<p>Consider the back-propagate fomulation of <code>Convolution</code> and <code>InnerProdcut</code> layer,</p>
-<p><span class="math display">\[dx = W dy,\]</span></p>
-<p>we will get a similar strategy of normalizing each row of <span class="math inline">\(W\)</span> to be on a <span class="math inline">\(\ell 2\)</span> unit ball. Please note that here we normalize through the fan-out dimension of <span class="math inline">\(W\)</span>, not the fan-in dimension in the forward propagation.</p>
-<h1 id="activation-layers">3. Activation Layers</h1>
-<p>One problem that can’t be avoided when calculating the formulations of activations is that we should not only assume the distribution of the gradients, but also the forward input of the activation, because the gradients of activations are usually dependent on the inputs. Here we assume that both the input <span class="math inline">\(x\)</span> and the gradient <span class="math inline">\(dy\)</span> follow the normal gaussian distribution <span class="math inline">\(N(0,I)\)</span>, and they are independent with each other.</p>
-<h2 id="relu">1) ReLU</h2>
-<p>The forward formulation of ReLU is,</p>
-<p><span class="math display">\[y = max(0, x).\]</span></p>
-<p>Its backward gradients can be easily obtained:</p>
-<p><span class="math display">\[dx_i = dy_i * \left\{
-\begin{array}{rcl}
-1 &amp; &amp; {x_i &gt; 0}\\
-0 &amp; &amp; {x_i \leq 0}.
-\end{array} \right.\]</span></p>
-<p>When <span class="math inline">\(x\sim N(0,I)\)</span>, the gradient of the ReLU layer can be seen as a Bernoulli distribution with probability of 0.5, so the backward mean and standard deviation formulas are similar with those of Dropout layer,</p>
-<p><span class="math display">\[E[dx] = 0,\]</span></p>
-<p><span class="math display">\[\sigma[dx]=\sqrt{\frac{1}{2}}.\]</span></p>
-<p>Here the question comes, now we have two different standard deviations, one for forward values and one for backward gradients, which one should be used to normalize the ReLU layer? My tendency is to use the <span class="math inline">\(\sigma\)</span> calculated by the backward gradients, because backward <span class="math inline">\(\sigma\)</span> is the real murderer of <strong>gradient</strong> vanishing. Moreover, since the bias term is not involved in the backward propagation, it is a good manner to substract the mean <span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span> after ReLU activation to ensure zero mean.</p>
-<h2 id="sigmoid">2) Sigmoid</h2>
-<p>The backward gradient of Sigmoid activation is,</p>
-<p><span class="math display">\[ dx = y \cdot (1-y).\]</span></p>
-<p>This time, I won’t attempt to calculate the close formulations of mean and std, it is really a tough work. I tend to directly use simulating to get the results.</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">y = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(-x));</span><br><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = dy .* y .* (<span class="number">1</span>-y);</span><br><span class="line"><span class="built_in">disp</span>([mean(dx) std(dx)]);</span><br></pre></td></tr></table></figure>
-<p>We can get <span class="math inline">\(E[dx] = 0\)</span> and <span class="math inline">\(\sigma[dx]=0.2123\)</span>. The same with ReLU, we should still minus the <span class="math inline">\(E[y]=0.5\)</span> after Sigmoid activation and use the <span class="math inline">\(\sigma\)</span> calculated by backward gradients, 0.2123.</p>
-<h1 id="pooling-layer">4. Pooling Layer</h1>
-<p>The standard deviation of <span class="math inline">\(3\times3\)</span> average pooling can be simulated by,</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dx = [randn(<span class="number">100000</span>,<span class="number">9</span>) / <span class="number">9</span>];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
-<p>It is <span class="math inline">\(\frac{1}{9}\)</span>, and we can infer that the <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> average pooling is <span class="math inline">\(\frac{1}{4}\)</span>.</p>
-<p>For max pooling, we only pass the gradient to one of the neurons in the pooling window, so we have,</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = [dy zeros(<span class="number">100000</span>,<span class="number">8</span>)];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
-<p>Running the script and we can get <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(3\times3\)</span> is <span class="math inline">\(\frac{1}{3}\)</span> and <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> is <span class="math inline">\(\frac{1}{2}\)</span>.</p>
-<h1 id="dropout-layer">5. Dropout Layer</h1>
-<p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
-<h1 id="conclusion">6. Conclusion</h1>
-<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The mean and std values of forward and backward data flows are listed here:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Param</th>
-<th align="center">Conv/IP</th>
-<th align="center">ReLU</th>
-<th align="center">Sigmoid</th>
-<th align="center"><span class="math inline">\(3\times3\)</span> Max Pooling</th>
-<th align="center">Ave Pooling</th>
-<th align="center">Dropout</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">fp mean</td>
-<td align="center">0</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span></td>
-<td align="center"><span class="math inline">\(\frac{1}{2}\)</span></td>
-<td align="center">1.4850</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center">fp std</td>
-<td align="center"><span class="math inline">\(\ell2\)</span> fan-in</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2} - \frac{1}{2\pi}}\)</span></td>
-<td align="center">0.2083</td>
-<td align="center">0.5978</td>
-<td align="center"><span class="math inline">\(\frac{1}{s}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">bp std</td>
-<td align="center"><span class="math inline">\(\ell2\)</span> fan-out</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2}}\)</span></td>
-<td align="center">0.2123</td>
-<td align="center"><span class="math inline">\(\frac{1}{3}\)</span></td>
-<td align="center"><span class="math inline">\(\frac{1}{s^2}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>However, here comes another problem that when we are using the std of backward gradients, the forward value scale would not be controlled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
-<p>So maybe a good choice is to use a separate scaling method for forward and backward propagation? This idea is conflict with the back-propagation algorithm, so we should still carefully examine it through experiment.</p>
+        <p>This article is a note on <a href="http://arxiv.org/abs/1603.01431" target="_blank" rel="external">《Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks》</a>.</p>
+<h2 id="introduction">1. Introduction</h2>
+<p>If you are doing research in Deep Learning, you must know the Batch Normalization[3] techinque, which is a powerful tool to avoid internal covariate shift and gradient vanishing. However, batch normalization only normalize the parametric layers such as convolution layer and innerproduct layer, leaving the chief murderer of gradient vanishing, the activation layers, apart. Another disadvantage of BN is that the it is data-dependent. The network may be unstable when the training samples are in high diversity, or training with small batch size, or our objective is a continuous function such as regression.</p>
+<p>In [1], the authors proposed a new standard that if we feed a uniform gaussian distributed data into a network, all the intermediate output should also be uniform gaussian distribute, or at least <strong>expected</strong> to have zero mean and one standard deviation. In this manner, the data flow of the whole network will be very stable, no numerical vanishment or explosion. Since this method is data-independent, it is suitable for regression task and training with batch size of 1.</p>
+<h2 id="parametric-layers">2. Parametric Layers</h2>
+<p>For parametric layers, such as convolution layer and innerproduct layer, they have a mathematic expression as,</p>
+<p><span class="math display">\[y = W^Tx.\]</span></p>
+<p>Here we express the convolution layer in a innerproduct way, i.e. using <code>im2col</code> operator to convert the feature map into a wide matrix <span class="math inline">\(x\)</span>.</p>
+<p>Now we assume that <span class="math inline">\(x\sim N(0,I)\)</span>, our objective is to let each element in <span class="math inline">\(y\)</span> also follows a uniform gaussian distribution, or at least each value is expected to have zero mean and variance is 1. We can easily find that <span class="math inline">\(E[y]=0\)</span> and</p>
+<p><span class="math display">\[Cov[y] = E[yy^T] = E[W^Txx^TW] = W^TE[xx^T]W = W^TW.\]</span></p>
+<p>Let <span class="math inline">\(W_i\)</span> to be the <span class="math inline">\(i\)</span>-th row of <span class="math inline">\(W\)</span>, then <span class="math inline">\(\Vert W_i\Vert _2\)</span> must equals to 1 to satisfy our target. So a good way to control the variance of each parametric layers’ output is to force each row of the weight matrix to be on a <span class="math inline">\(\ell 2\)</span> unit ball.</p>
+<p>To achieve this, we may scale the weight matrix during feed forward,</p>
+<p><span class="math display">\[\tilde{W_i} = \frac{W_i}{\Vert W_i \Vert _2},\]</span></p>
+<p>and in back propagation a partial derivative is used:</p>
+<p><span class="math display">\[\frac{\partial \ell}{\partial W_i} = 
+\frac{\frac{\partial \ell}{\partial \tilde{W_i}} - 
+\tilde{W_i}\sum_j{\frac{\partial \ell}{\partial \tilde{W_{ij}}}\tilde{W_{ij}}}}
+{\Vert W_i \Vert _2}.\]</span></p>
+<p>Or, we can directly use the standard back propagation to update <span class="math inline">\(W\)</span> and force to normalize it after each iteration. Which one is better still need examination by experiment.</p>
+<h2 id="activation-layers">3. Activation Layers</h2>
+<p>Similar with the paramteric layers, we also require the post-activation values to have zero mean and 1 standard deviation.</p>
+<h3 id="relu">1) ReLU</h3>
+<p>We all know that the formula of ReLU is,</p>
+<p><span class="math display">\[y = max(x, 0).\]</span></p>
+<p>Assuming <span class="math inline">\(x\sim N(0,I)\)</span>, we can obtain,</p>
+<p><span class="math display">\[E[y] = \int_{0}^{+\infty}x\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=
+\frac{1}{\sqrt{2\pi}}\int_{0}^{+\infty}e^{-\frac{x^2}{2}}d\frac{x^2}{2}.\]</span></p>
+<p>It can be easily got, <span class="math inline">\(E[y] = \sqrt{\frac{1}{2\pi}}\)</span>. Then</p>
+<p><span class="math display">\[E[y^2] = \int_{0}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=
+\frac{1}{2}\int_{-\infty}^{+\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx = \frac{1}{2},\]</span></p>
+<p><span class="math display">\[Var[y] = E[y^2] - E[y]^2=\frac{1}{2} - \frac{1}{2\pi}.\]</span></p>
+<p>Thus, we should normalize the post-activation of ReLU by substracting <span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span> and dividing <span class="math inline">\(\sqrt{\frac{1}{2} - \frac{1}{2\pi}}\)</span>.</p>
+<h3 id="sigmoid">2) Sigmoid</h3>
+<p>The formula of Sigmoid activation is,</p>
+<p><span class="math display">\[y = \frac{1}{1+e^{-x}},\]</span></p>
+<p><span class="math display">\[E[y] = \int_{-\infty}^{+\infty}\frac{1}{1+e^{-x}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx \\
+=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2}+\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\\
+=\int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}}-\frac{1}{2})\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx +\frac{1}{2}\\
+=0+\frac{1}{2}=\frac{1}{2},\]</span></p>
+<p><span class="math display">\[E[y^2] = \int_{-\infty}^{+\infty}(\frac{1}{1+e^{-x}})^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx.\]</span></p>
+<p>OK, I don’t think we can get a close form of the integral part of <span class="math inline">\(E[y^2]\)</span>. Please note that we are not using the exact form of the equation. What we need is only an empirical value, so we can got the numbers by simulating. With a huge amount of random values, say 100,000, we can get relatively accurate means and standard derivations. By running the script in Matlab,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(100000,1);</span><br><span class="line">y = 1 ./ (1 + exp(-x));</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
+<p>we can get Sigmoid’s standard deviation: <strong>0.2083</strong>. This value can be directly wrote into the program to let the post-sigmoid value have 1 standard deviation.</p>
+<h2 id="pooling-layer">4. Pooling Layer</h2>
+<p>There are two types of pooling layer, average-pooling and max-pooling. For the average-pooling layer, it is easy to infer that <span class="math inline">\(E[y] = 0\)</span> and <span class="math inline">\(Std[y] = \frac{1}{\sqrt{n}} = \frac{1}{s}\)</span>, where <span class="math inline">\(n\)</span> is the number of neurons in a pooling window or <span class="math inline">\(s\)</span> is the side length of a square pooling window.</p>
+<p>For the max-pooling layer, there is no close form expressions too. We still use the simulated values generated by,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = randn(10000000, 9);</span><br><span class="line">y = max(x, [], 2);</span><br><span class="line">disp([mean(y) std(y)]);</span><br></pre></td></tr></table></figure>
+<p>The mean value of a <span class="math inline">\(3\times3\)</span> max-pooling is <strong>1.4850</strong> and the standard deviation is <strong>0.5978</strong>. For <span class="math inline">\(2\times2\)</span> max-pooling, mean is <strong>1.0291</strong> and standard deviation is <strong>0.7010</strong>.</p>
+<h2 id="dropout-layer">5. Dropout Layer</h2>
+<p>Dropout is also a widely used layer in CNN. Although it is claimed to be useless in the NormProp paper, we still would like to record the formulations here. Dropout randomly erase values with a probability of <span class="math inline">\(1-p\)</span>. Now we write it into a mathematic form,</p>
+<p><span class="math display">\[y = x \odot r,\]</span></p>
+<p>where <span class="math inline">\(r\sim Bernoulli(p)\)</span>. Thus,</p>
+<p><span class="math display">\[E[y] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{xr_ip_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
+=0 * \int_{-\infty}^{+\infty}{x(1-p)\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx + 1 * \int_{-\infty}^{+\infty}{xp\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
+=0\]</span></p>
+<p><span class="math display">\[E[y^2] = \sum_{i=0,1}\int_{-\infty}^{+\infty}{(xr_i)^2p_i\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
+=0+\int_{-\infty}^{+\infty}{x^2p\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}}dx\\
+=p\]</span></p>
+<p><span class="math display">\[Std[y] = \sqrt{E[y^2]-E[y]^2}=\sqrt{p}\]</span></p>
+<p>Interestingly, this result is different from what we usually do. We usally preserve values with a ratio of <span class="math inline">\(p\)</span> and divide the preserved values by <span class="math inline">\(p\)</span>, too. Now as we calculated, to achieve 1 s.t.d., we should divide the preserved values by <span class="math inline">\(\sqrt{p}\)</span>. This result should be carefully examined by experiment in the future.</p>
+<h2 id="conclusion">6. Conclusion</h2>
+<p>In this report, we followed the methodology of [1] to infer the formulation for normalizing all popular layers of a modern CNN. We believe that normalizing every layer with mean substracted and s.t.d. divided will become a standard in the near future. Now we should start to modify our present layers with the new normalization method, and when we are creating new layers, we should keep in mind to normalzie it with the method introduced above.</p>
+<p>The shortage of this report is that we haven’t considered the back-propagation procedure. In paper [1][4], they claim that by normalizing the singular values of Jacobian matrix to 1 will lead to faster convergency and more numerically stable. I will study them and explore how to integrate the Jacobian normalization into the present normalization method.</p>
+<h2 id="reference">Reference</h2>
+<p>[1] Devansh Arpit, Yingbo Zhou, Bhargava U. Kota, Venu Govindaraju, <strong>Normalization Propagation: A Parametric Technique for Removing Internal Covariate Shift in Deep Networks</strong>. <a href="http://arxiv.org/abs/1603.01431" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1603.01431</a></p>
+<p>[2] Tim Salimans, Diederik P. Kingma, Weight Normalization: <strong>A Simple Reparameterization to Accelerate Training of Deep Neural Networks</strong>. <a href="http://arxiv.org/abs/1602.07868" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1602.07868</a></p>
+<p>[3] Sergey Ioffe, Christian Szegedy, <strong>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</strong>. <a href="http://arxiv.org/abs/1502.03167" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1502.03167</a></p>
+<p>[4] Andrew M. Saxe, James L. McClelland, Surya Ganguli, <strong>Exact solutions to the nonlinear dynamics of learning in deep linear neural networks</strong>. <a href="http://arxiv.org/abs/1312.6120" class="uri" target="_blank" rel="external">http://arxiv.org/abs/1312.6120</a></p>
+<h1 id="appendices">Appendices</h1>
+<h2 id="a.-the-formula-fault-of-1">A. The formula fault of [1]</h2>
+<p>In [1], they present a bound describing the error of using diagnose matrix to approximate a covariance matrix. However, the bound is wrong. They mistake the <span class="math inline">\(\Vert W_i\Vert_2^4\)</span> by <span class="math inline">\(\Vert W_i\Vert_2^2\)</span> in the last line of equation 18. Then the equation 3 and 19 become to:</p>
+<p><span class="math display">\[\Vert \Sigma - diag(\alpha) \Vert_F^2\le \sigma^4 \sum_{i,j=1;i\ne j}^m{m(m-1)\mu^2 \Vert W_i \Vert_2^2 \Vert W_j \Vert_2^2}\]</span></p>
+<p>As we can see, there is no <span class="math inline">\(1- \Vert W_i \Vert_2^2\)</span> at all, so there is no reason to explain why we should normalize <span class="math inline">\(\Vert W_i \Vert_2^2=1\)</span>.</p>
+<p>However, they still get the correct conclusion that we should normalize the weight matrix by the <span class="math inline">\(\ell 2\)</span> norm of rows. But the theoretical analysis of the bound is wrong. In fact, the reason why we should normalize the weight matrix is very simple as we wrote above.</p>
 
       
     </div>
@@ -370,16 +364,16 @@ In the last post, we discussed how to make all neurons of a neural network to ha
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/21/Normalization-Propagation/" rel="next" title="Normalizing All Layers： A New Standard?">
-                <i class="fa fa-chevron-left"></i> Normalizing All Layers： A New Standard?
+              <a href="/2016/03/21/Face-Visualization/" rel="next" title="What do you look like in computers’ brain?">
+                <i class="fa fa-chevron-left"></i> What do you look like in computers’ brain?
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/18/Normalization-Propagation-Stride/" rel="prev" title="Normalizing All Layers： Stride">
-                Normalizing All Layers： Stride <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/" rel="prev" title="Normalizing All Layers： Back-Propagation">
+                Normalizing All Layers： Back-Propagation <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +527,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parametric-layer"><span class="nav-number">2.</span> <span class="nav-text">2. Parametric Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#activation-layers"><span class="nav-number">3.</span> <span class="nav-text">3. Activation Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#relu"><span class="nav-number">3.1.</span> <span class="nav-text">1) ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.2.</span> <span class="nav-text">2) Sigmoid</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pooling-layer"><span class="nav-number">4.</span> <span class="nav-text">4. Pooling Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dropout-layer"><span class="nav-number">5.</span> <span class="nav-text">5. Dropout Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">6. Conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parametric-layers"><span class="nav-number">2.</span> <span class="nav-text">2. Parametric Layers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#activation-layers"><span class="nav-number">3.</span> <span class="nav-text">3. Activation Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#relu"><span class="nav-number">3.1.</span> <span class="nav-text">1) ReLU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.2.</span> <span class="nav-text">2) Sigmoid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pooling-layer"><span class="nav-number">4.</span> <span class="nav-text">4. Pooling Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dropout-layer"><span class="nav-number">5.</span> <span class="nav-text">5. Dropout Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">6. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#appendices"><span class="nav-number"></span> <span class="nav-text">Appendices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a.-the-formula-fault-of-1"><span class="nav-number">1.</span> <span class="nav-text">A. The formula fault of [1]</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -801,9 +795,9 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 
     <script type="text/javascript">
       var disqus_shortname = 'happynear';
-      var disqus_identifier = '2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
-      var disqus_title = 'Normalizing All Layers： Back-Propagation';
-      var disqus_url = 'http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
+      var disqus_identifier = '2016/03/21/Normalization-Propagation/';
+      var disqus_title = 'Normalizing All Layers： A New Standard?';
+      var disqus_url = 'http://happynear.wang/2016/03/21/Normalization-Propagation/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

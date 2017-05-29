@@ -59,19 +59,27 @@
 
 
 
-<meta name="description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
+<meta name="description" content="1. Introduction
+Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Normalizing All Layers： Back-Propagation">
-<meta property="og:url" content="http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/index.html">
+<meta property="og:title" content="What do you look like in computers’ brain?">
+<meta property="og:url" content="http://happynear.wang/2016/03/21/Face-Visualization/index.html">
 <meta property="og:site_name" content="happynear's blog">
-<meta property="og:description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
-<meta property="og:updated_time" content="2016-04-15T14:15:23.941Z">
+<meta property="og:description" content="1. Introduction
+Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png">
+<meta property="og:image" content="http://happynear.wang/images/pedestrian.png">
+<meta property="og:updated_time" content="2016-05-22T16:50:25.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Normalizing All Layers： Back-Propagation">
-<meta name="twitter:description" content="1.Introduction
-In the last post, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the Conclusion section claimed, we haven’t considered the b">
+<meta name="twitter:title" content="What do you look like in computers’ brain?">
+<meta name="twitter:description" content="1. Introduction
+Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png">
 
 
 
@@ -89,7 +97,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
   };
 </script>
 
-  <title> Normalizing All Layers： Back-Propagation | happynear's blog </title>
+  <title> What do you look like in computers’ brain? | happynear's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -209,7 +217,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
             
             
               
-                Normalizing All Layers： Back-Propagation
+                What do you look like in computers’ brain?
               
             
           </h1>
@@ -221,8 +229,8 @@ In the last post, we discussed how to make all neurons of a neural network to ha
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T11:50:00-04:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-03-21T13:32:32-04:00" content="2016-03-21">
+              2016-03-21
             </time>
           </span>
 
@@ -232,8 +240,8 @@ In the last post, we discussed how to make all neurons of a neural network to ha
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/28/Normalizing-All-Layers：-Back-Propagation/" itemprop="commentsCount"></span>
+                <a href="/2016/03/21/Face-Visualization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/21/Face-Visualization/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -243,7 +251,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 
           
           
-             <span id="/2016/03/28/Normalizing-All-Layers：-Back-Propagation/" class="leancloud_visitors" data-flag-title="Normalizing All Layers： Back-Propagation">
+             <span id="/2016/03/21/Face-Visualization/" class="leancloud_visitors" data-flag-title="What do you look like in computers’ brain?">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -264,89 +272,64 @@ In the last post, we discussed how to make all neurons of a neural network to ha
       
 
       
-        <h1 id="introduction">1.Introduction</h1>
-<p>In the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/" target="_blank" rel="external">last post</a>, we discussed how to make all neurons of a neural network to have normal gaussian distribution. However, as the <a href="http://saban.wang/2016/03/22/Normalization-Propagation/#conclusion" target="_blank" rel="external">Conclusion section</a> claimed, we haven’t considered the back-propagation procedure. In fact, when we talk about the gradient vanishing or exploding problem, we usually refer to the gradients flow in the back-propagation procedure. Since this, the correct way seems to be normalizing the backward gradients of neurons, instead of the forward values.</p>
-<p>In this post, we will discuss how to normalize all the gradients using a similar philosophy with the last post: for a given gradient <span class="math inline">\(dy\sim N(0,I)\)</span>, normalizing the layer to make sure that <span class="math inline">\(dx\)</span> is expected to have zero mean and one standard deviation.</p>
-<h1 id="parametric-layer">2. Parametric Layer</h1>
-<p>Consider the back-propagate fomulation of <code>Convolution</code> and <code>InnerProdcut</code> layer,</p>
-<p><span class="math display">\[dx = W dy,\]</span></p>
-<p>we will get a similar strategy of normalizing each row of <span class="math inline">\(W\)</span> to be on a <span class="math inline">\(\ell 2\)</span> unit ball. Please note that here we normalize through the fan-out dimension of <span class="math inline">\(W\)</span>, not the fan-in dimension in the forward propagation.</p>
-<h1 id="activation-layers">3. Activation Layers</h1>
-<p>One problem that can’t be avoided when calculating the formulations of activations is that we should not only assume the distribution of the gradients, but also the forward input of the activation, because the gradients of activations are usually dependent on the inputs. Here we assume that both the input <span class="math inline">\(x\)</span> and the gradient <span class="math inline">\(dy\)</span> follow the normal gaussian distribution <span class="math inline">\(N(0,I)\)</span>, and they are independent with each other.</p>
-<h2 id="relu">1) ReLU</h2>
-<p>The forward formulation of ReLU is,</p>
-<p><span class="math display">\[y = max(0, x).\]</span></p>
-<p>Its backward gradients can be easily obtained:</p>
-<p><span class="math display">\[dx_i = dy_i * \left\{
-\begin{array}{rcl}
-1 &amp; &amp; {x_i &gt; 0}\\
-0 &amp; &amp; {x_i \leq 0}.
-\end{array} \right.\]</span></p>
-<p>When <span class="math inline">\(x\sim N(0,I)\)</span>, the gradient of the ReLU layer can be seen as a Bernoulli distribution with probability of 0.5, so the backward mean and standard deviation formulas are similar with those of Dropout layer,</p>
-<p><span class="math display">\[E[dx] = 0,\]</span></p>
-<p><span class="math display">\[\sigma[dx]=\sqrt{\frac{1}{2}}.\]</span></p>
-<p>Here the question comes, now we have two different standard deviations, one for forward values and one for backward gradients, which one should be used to normalize the ReLU layer? My tendency is to use the <span class="math inline">\(\sigma\)</span> calculated by the backward gradients, because backward <span class="math inline">\(\sigma\)</span> is the real murderer of <strong>gradient</strong> vanishing. Moreover, since the bias term is not involved in the backward propagation, it is a good manner to substract the mean <span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span> after ReLU activation to ensure zero mean.</p>
-<h2 id="sigmoid">2) Sigmoid</h2>
-<p>The backward gradient of Sigmoid activation is,</p>
-<p><span class="math display">\[ dx = y \cdot (1-y).\]</span></p>
-<p>This time, I won’t attempt to calculate the close formulations of mean and std, it is really a tough work. I tend to directly use simulating to get the results.</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">y = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(-x));</span><br><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = dy .* y .* (<span class="number">1</span>-y);</span><br><span class="line"><span class="built_in">disp</span>([mean(dx) std(dx)]);</span><br></pre></td></tr></table></figure>
-<p>We can get <span class="math inline">\(E[dx] = 0\)</span> and <span class="math inline">\(\sigma[dx]=0.2123\)</span>. The same with ReLU, we should still minus the <span class="math inline">\(E[y]=0.5\)</span> after Sigmoid activation and use the <span class="math inline">\(\sigma\)</span> calculated by backward gradients, 0.2123.</p>
-<h1 id="pooling-layer">4. Pooling Layer</h1>
-<p>The standard deviation of <span class="math inline">\(3\times3\)</span> average pooling can be simulated by,</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dx = [randn(<span class="number">100000</span>,<span class="number">9</span>) / <span class="number">9</span>];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
-<p>It is <span class="math inline">\(\frac{1}{9}\)</span>, and we can infer that the <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> average pooling is <span class="math inline">\(\frac{1}{4}\)</span>.</p>
-<p>For max pooling, we only pass the gradient to one of the neurons in the pooling window, so we have,</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dy = <span class="built_in">randn</span>(<span class="number">100000</span>,<span class="number">1</span>);</span><br><span class="line">dx = [dy zeros(<span class="number">100000</span>,<span class="number">8</span>)];</span><br><span class="line"><span class="built_in">disp</span>(std(dx(:)));</span><br></pre></td></tr></table></figure>
-<p>Running the script and we can get <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(3\times3\)</span> is <span class="math inline">\(\frac{1}{3}\)</span> and <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(2\times2\)</span> is <span class="math inline">\(\frac{1}{2}\)</span>.</p>
-<h1 id="dropout-layer">5. Dropout Layer</h1>
-<p>The backward formula for Dropout layer is almost the same with the forward one, we should still divide the preserved values by <span class="math inline">\(\sqrt{q}\)</span> to achieve 1 std for both forward and backward procedure.</p>
-<h1 id="conclusion">6. Conclusion</h1>
-<p>In this post, we have discussed the normalization strategy that serves the gradient flow of the backward propagation. The mean and std values of forward and backward data flows are listed here:</p>
+        <h1 id="introduction">1. Introduction</h1>
+<p>Machine Learning researchers may split the learned model into two catogories, generative model and discriminative model, and Convolutional Neural Network is usually seen as a powerful discriminative model. We used to think that the discriminative model have no ability of generating the whole image, just as we human beings, we cannot draw a vivid picture without professional training.</p>
+<p>Now we all know that the CNN based system has surpassed human beings in the ability of recognizing people. So do the discriminative CNNs have better ability of drawing portraits, even trained with only discriminative signals? This post will tell you the answer.</p>
+<p>Firstly, we need to find a CNN model which is close to the human beings in recognizing people. Thanks <a href="https://github.com/AlfredXiangWu" target="_blank" rel="external">Wu Xiang</a>. He has provided a model with 98.13% verification rate on LFW, while human beings’ average rate is about 99%. We will use <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">the model</a> he provided for the following experiments.</p>
+<h1 id="method">2. Method</h1>
+<p>If you are interested in Deep Learning, you must know the <a href="http://googleresearch.blogspot.co.id/2015/06/inceptionism-going-deeper-into-neural.html" target="_blank" rel="external">Inceptionism</a>, which have raised a huge wave of using Neural Networks for art making. Here we will use a similar tool, reversing the neural network. Different from what we usually do, giving an image to a CNN model and it tell us this is Susan or Lucy, now we will tell the neural network from the tail of CNN that we need Susan’s image. Then by back-propagation, we will finally get an image from the input side of the CNN model.</p>
+<h1 id="result">3. Result</h1>
+<p>Wu Xiang’s model is trained with <a href="http://www.cbsr.ia.ac.cn/english/CASIA-WebFace-Database.html" target="_blank" rel="external">CASIA-WebFace dataset</a>, which is very huge, containing about 490,000 face images of 10,575 movie stars. Now, let’s see choose some movie stars and see what they look like in computer’s brain:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="center">Param</th>
-<th align="center">Conv/IP</th>
-<th align="center">ReLU</th>
-<th align="center">Sigmoid</th>
-<th align="center"><span class="math inline">\(3\times3\)</span> Max Pooling</th>
-<th align="center">Ave Pooling</th>
-<th align="center">Dropout</th>
+<th align="left">Bruce Lee</th>
+<th align="center">Mr Bean</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">fp mean</td>
-<td align="center">0</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2\pi}}\)</span></td>
-<td align="center"><span class="math inline">\(\frac{1}{2}\)</span></td>
-<td align="center">1.4850</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center">fp std</td>
-<td align="center"><span class="math inline">\(\ell2\)</span> fan-in</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2} - \frac{1}{2\pi}}\)</span></td>
-<td align="center">0.2083</td>
-<td align="center">0.5978</td>
-<td align="center"><span class="math inline">\(\frac{1}{s}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">bp std</td>
-<td align="center"><span class="math inline">\(\ell2\)</span> fan-out</td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{2}}\)</span></td>
-<td align="center">0.2123</td>
-<td align="center"><span class="math inline">\(\frac{1}{3}\)</span></td>
-<td align="center"><span class="math inline">\(\frac{1}{s^2}\)</span></td>
-<td align="center"><span class="math inline">\(\sqrt{\frac{1}{p}}\)</span></td>
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bruce%20Lee.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Mr%20Bean.png" alt="1"></td>
 </tr>
 </tbody>
 </table>
-<p>However, here comes another problem that when we are using the std of backward gradients, the forward value scale would not be controlled well. Inhomogeneous(非齐次) activations, such as sigmoid and tanh, are not suitable for this method because their domain may not cover a sufficient non-linear part of the activation.</p>
-<p>So maybe a good choice is to use a separate scaling method for forward and backward propagation? This idea is conflict with the back-propagation algorithm, so we should still carefully examine it through experiment.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Yun-Fat Chow</th>
+<th align="center">Anne Hathaway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Yun-Fat%20Chow.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Anne%20Hathaway.png" alt="1"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Bingbing Li</th>
+<th align="center">Bingbing Fan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Li.png" alt="1"></td>
+<td align="center"><img src="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis/gallery/Bingbing%20Fan.png" alt="1"></td>
+</tr>
+</tbody>
+</table>
+<p>LoL, are these portraits somewhat look like them in the real world? We can see that the CNN have indeedly memorized some features of the training samples, not as the all along prejudice that discriminative model cannot do generating tasks. They can, and do well!</p>
+<p>PS: I can’t wait to show the images generated by a pornography detection system. If you have trained one, please contact me!</p>
+<p>PS2: The codes are on <a href="https://raw.githubusercontent.com/happynear/DeepVisualization/master/FaceVis" target="_blank" rel="external">my Github</a>. The face verification model can be found in <a href="https://github.com/AlfredXiangWu/face_verification_experiment" target="_blank" rel="external">Wu Xiang’s Github</a>.</p>
+<p>PS3: A friend of mine gave me a pedestrian detection model. Here is its visualization. I believe you can find a “fat person” in it, LOL.</p>
+<div class="figure">
+<img src="/images/pedestrian.png" alt="pedestrian">
+<p class="caption">pedestrian</p>
+</div>
 
       
     </div>
@@ -370,16 +353,16 @@ In the last post, we discussed how to make all neurons of a neural network to ha
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/21/Normalization-Propagation/" rel="next" title="Normalizing All Layers： A New Standard?">
-                <i class="fa fa-chevron-left"></i> Normalizing All Layers： A New Standard?
+              <a href="/2016/03/21/Visualize-NN-Complexity/" rel="next" title="Visualize the Complexity of Neural Networks">
+                <i class="fa fa-chevron-left"></i> Visualize the Complexity of Neural Networks
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/18/Normalization-Propagation-Stride/" rel="prev" title="Normalizing All Layers： Stride">
-                Normalizing All Layers： Stride <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/21/Normalization-Propagation/" rel="prev" title="Normalizing All Layers： A New Standard?">
+                Normalizing All Layers： A New Standard? <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +516,7 @@ In the last post, we discussed how to make all neurons of a neural network to ha
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parametric-layer"><span class="nav-number">2.</span> <span class="nav-text">2. Parametric Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#activation-layers"><span class="nav-number">3.</span> <span class="nav-text">3. Activation Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#relu"><span class="nav-number">3.1.</span> <span class="nav-text">1) ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.2.</span> <span class="nav-text">2) Sigmoid</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pooling-layer"><span class="nav-number">4.</span> <span class="nav-text">4. Pooling Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dropout-layer"><span class="nav-number">5.</span> <span class="nav-text">5. Dropout Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">6. Conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">2.</span> <span class="nav-text">2. Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#result"><span class="nav-number">3.</span> <span class="nav-text">3. Result</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -801,9 +784,9 @@ In the last post, we discussed how to make all neurons of a neural network to ha
 
     <script type="text/javascript">
       var disqus_shortname = 'happynear';
-      var disqus_identifier = '2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
-      var disqus_title = 'Normalizing All Layers： Back-Propagation';
-      var disqus_url = 'http://happynear.wang/2016/03/28/Normalizing-All-Layers：-Back-Propagation/';
+      var disqus_identifier = '2016/03/21/Face-Visualization/';
+      var disqus_title = 'What do you look like in computers’ brain?';
+      var disqus_url = 'http://happynear.wang/2016/03/21/Face-Visualization/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
