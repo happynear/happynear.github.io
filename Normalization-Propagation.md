@@ -18,7 +18,7 @@ For parametric layers, such as convolution layer and innerproduct layer, they ha
 
 $$y = W^Tx.$$
 
-Here we express the convolution layer in a innerproduct way, i.e. using `im2col` operator to convert the feature map into a wide matrix $x$. 
+Here we express the convolution layer in a inner-product way, i.e. using `im2col` operator to convert the feature map into a wide matrix $x$. 
 
 Now we assume that $x\sim N(0,I)$, our objective is to let each element in $y$ also follows a uniform gaussian distribution, or at least each value is expected to have zero mean and variance is 1. We can easily find that $E[y]=0$ and 
 
