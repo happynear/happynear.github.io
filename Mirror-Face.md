@@ -5,7 +5,7 @@ tags: Deep Learning, Face Verification
 
 # Mirror Face
 
-It seems that many friends are curious about the mirror face trick. I am writing this technical report to describe it with more details.
+It seems that many friends are curious about the mirror face trick described in [my paper](https://arxiv.org/abs/1704.06369). I am writing this technical report to describe it with more details.
 
 ![mirror](https://raw.githubusercontent.com/happynear/NormFace/master/mirror.png)
 
