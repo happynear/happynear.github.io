@@ -10,7 +10,7 @@ It seems that many friends are curious about the mirror face trick described in 
 ![mirror](https://raw.githubusercontent.com/happynear/NormFace/master/mirror.png)
 
 Mirror face is (one of) the most effective prior for face image analysis. 
-It extracts features from the frontal face and mirror face simultaneously and merge the two features together as the final feature. A sample network is in [FaceNormGithub/prototxt/example_of_mirror_face.prototxt](https://github.com/happynear/NormFace/blob/master/prototxt/example_of_mirror_face.prototxt).
+It extracts features from the frontal face and mirror face simultaneously and merges the two features together as the final feature. A sample network is in [FaceNormGithub/prototxt/example_of_mirror_face.prototxt](https://github.com/happynear/NormFace/blob/master/prototxt/example_of_mirror_face.prototxt).
 
 Mirror face can be trained in an end-to-end manner.
 However, I find it has no help on **training** face verification models.
@@ -47,4 +47,4 @@ With my model:
 
 It's strange that with my C-contrastive loss, the performance of `No PCA` is better... Anyway, in Wu's paper, he didn't use PCA either. So there is nothing wrong with what I said in my paper: "I follow all the experiment settings of the original paper".
 
-To sum up, the mirror face trick is effective on most of models (actually I never see cases that mirror face does not work). However, we are lacking of theoretical explanation for it. Now we can only explain it as model ensemble. Whether to use SUM or MAX, how to train it end-to-endly in face verification models, these are still open problems. Hope this report can inspire people to do further research.
+To sum up, the mirror face trick is effective on most of the models (actually I never see cases that mirror face does not work). However, we are lacking the theoretical explanation for it. Now we can only explain it as model ensemble. Whether to use SUM or MAX, how to train it end-to-endly in face verification models, these are still open problems. Hope this report can inspire people to do further research.
