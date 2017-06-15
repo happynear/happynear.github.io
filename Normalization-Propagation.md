@@ -10,7 +10,7 @@ Covariate Shift in Deep Networks》](http://arxiv.org/abs/1603.01431).
 
 If you are doing research in Deep Learning, you must know the Batch Normalization[3] techinque, which is a powerful tool to avoid internal covariate shift and gradient vanishing.  However, batch normalization only normalize the parametric layers such as convolution layer and innerproduct layer, leaving the chief murderer of gradient vanishing, the activation layers, apart.  Another disadvantage of BN is that the it is data-dependent. The network may be unstable when the training samples are in high diversity, or training with small batch size, or our objective is a continuous function such as regression.
 
-In [1], the authors proposed a new standard that if we feed a uniform gaussian distributed data into a network, all the intermediate output should also be uniform gaussian distribute, or at least **expected** to have zero mean and one standard deviation. In this manner, the data flow of the whole network will be very stable, no numerical vanishment or explosion. Since this method is data-independent, it is suitable for regression task and training with batch size of 1.
+In [1], the authors proposed a new standard that if we feed a uniform gaussian distributed data into a network, all the intermediate output should also be uniform gaussian distribute, or at least **expected** to have zero mean and one standard deviation. In this manner, the data flow of the whole network will be very stable, no numerical vanishment or explosion. Since this method is data-independent, it is suitable for regression tasks or training with batch size of 1.
 
 ## 2. Parametric Layers
 
