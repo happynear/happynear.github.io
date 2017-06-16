@@ -14,7 +14,7 @@ It extracts features from the frontal face and mirror face simultaneously and me
 
 Mirror face can be trained in an end-to-end manner.
 However, I find it has no help on **training** face verification models.
-It can improve the performance of face identification, but when I applied it on face verification, the accuracy even decreased:(
+It can improve the performance of face identification, but when I apply it on face verification, the accuracy even decreases:(
 
 Here are the accuracies using [Wen's model](https://github.com/ydwen/caffe-face) with different feature merging strategy.
 We didn't put these tables into our paper because we thought this was only a trick.
