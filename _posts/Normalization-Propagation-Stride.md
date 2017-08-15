@@ -6,7 +6,7 @@ tags: Deep Learning
 
 In the [last post](http://happynear.wang/2016/03/28/Normalizing-All-Layers%EF%BC%9A-Back-Propagation/), we have discussed how to normalize the gradients in the back propagate procedure. However, we left a problem about the stride parameter of the convolution layer and pooling layer. It is not an easy task so I tend to open a new post to discuss it.
 
-In this article, we are looking at a convolution layer or pooling layer with $w\times w$ window and $s\times s$ stride. These two symbols are all the same in the following paragraphs. We will use FP to infer to the forward propagation and BP for backward propagation in short.
+In this article, we are looking at a convolution layer or pooling layer with $w\times w$ window and $s\times s$ stride. These two symbols are all the same in the following paragraphs. We will use FP to refer to the forward propagation and BP for backward propagation in short.
 
 In the FP, we do not need to consider the stride parameter because every output pixel accumulates values from all input pixels of $w\times w$, no matter how much pixel strides are applied. However, in the BP procedure, each output pixel (input in FP) correspond to only a small subset of input pixels. Different from striding on the feature map during FP, we do stride on the kernel in BP. I have drawn a picture to illustrate this procedure.
 
